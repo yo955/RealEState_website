@@ -1,9 +1,9 @@
-"use client"; // لا تنسى هذا السطر في Next.js
+"use client";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin"; // استيراد TextPlugin
+import { TextPlugin } from "gsap/TextPlugin";
 
-gsap.registerPlugin(TextPlugin); // تسجيل TextPlugin
+gsap.registerPlugin(TextPlugin);
 
 const TypingAnimation = () => {
   const textRef = useRef(null);
@@ -11,10 +11,10 @@ const TypingAnimation = () => {
   let currentIndex = 0;
 
   useEffect(() => {
-    if (!textRef.current) return; // التأكد من وجود المرجع
+    if (!textRef.current) return;
 
     const typeText = () => {
-      const text = texts[currentIndex] + "_"; // إضافة علامة "_" في نهاية النص
+      const text = texts[currentIndex] + "_";
       gsap.to(textRef.current, {
         text: text,
         duration: 0.5,
@@ -22,11 +22,11 @@ const TypingAnimation = () => {
         onComplete: () => {
           gsap.to(textRef.current, {
             duration: 0.5,
-            delay: 0.5, // تأخير قبل المسح
-            text: "", // المسح
+            delay: 0.5,
+            text: "",
             onComplete: () => {
               currentIndex = (currentIndex + 1) % texts.length; // التبديل إلى الكلمة التالية
-              typeText(); // استدعاء الدالة مرة أخرى
+              typeText();
             },
           });
         },
@@ -42,15 +42,12 @@ const TypingAnimation = () => {
 
   return (
     <div className="flex ">
-      <h1 className="text-[8.5em] text-white mr-4 ">نمو</h1> {/* كلمة "نمو" ثابتة */}
+      <h1 className="text-[3.5em] sm:text-[5em] lg:text-[8.5em] text-white mr-4 ">
+        نمو
+      </h1>{" "}
       <div
         ref={textRef}
-        style={{
-          fontFamily: "Red Hat Display",
-          color: "white",
-          fontSize: "8.5em",
-          fontWeight: 500,
-        }}
+        className=" font-medium text-[3.5em] sm:text-[5em] lg:text-[8.5em] text-white font-sans"
       />
     </div>
   );
