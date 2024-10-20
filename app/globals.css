@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+* {
+  box-sizing: border-box;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,10 +20,44 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+/* Animation writing */
+@keyframes blink {
+  50% {
+    opacity: 0; /* إخفاء المؤشر */
+  }
+}
+
+.animate-blink {
+  display: inline-block; /* تأكد من أن العنصر يتم عرض ككتلة */
+  animation: blink 0.7s step-end infinite; /* إضافة تأثير وميض */
+}
+/* responsive container */
+
+/* أو يمكنك استخدام أبعاد Tailwind CSS */
+.container {
+  padding: 0 1rem; /* تكافئ تقريبًا px-4 */
+  max-width: 100%;
+}
+
+/* لتطبيق padding أكبر في الشاشات الأكبر */
+@media (min-width: 640px) {
+  .container {
+    padding: 0 4rem; /* تكافئ تقريبًا px-16 */
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 7rem; /* تكافئ تقريبًا px-28 */
+    max-width: 100%;
   }
 }
