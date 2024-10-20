@@ -21,6 +21,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 @layer utilities {
