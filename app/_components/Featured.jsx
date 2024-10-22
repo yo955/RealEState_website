@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 // React Icons //
 import AosWrapper from "../lib/ScrollAnimation";
 import Card from "./FeaturedCard";
-
+import Link from "next/link";
 const Featured = () => {
   const CardContent = [
     {
@@ -54,9 +54,11 @@ const Featured = () => {
     <section className="mt-16 pb-12">
       <div className="header flex items-center justify-between container mb-10">
         <h1 className=" text-black text-3xl font-bold">مشاريعنا</h1>
-        <h1 className=" text-black text-2xl from-neutral-400 border-b-2 border-black cursor-pointer flex items-center">
-          جميع المشاريع <FaArrowLeft className="m-1" />
-        </h1>
+        <Link href="/projects">
+          <h1 className=" text-black text-2xl from-neutral-400 border-b-2 border-black cursor-pointer flex items-center">
+            جميع المشاريع <FaArrowLeft className="m-1" />
+          </h1>
+        </Link>
       </div>
       <div className="cards grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 container">
         {CardJsx}

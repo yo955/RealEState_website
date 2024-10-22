@@ -2,6 +2,7 @@ import React from "react";
 import AboutCard from "./AboutCard";
 import { FaHouse } from "react-icons/fa6";
 import AosWrapper from "../lib/ScrollAnimation";
+import Link from "next/link";
 
 const FeatureAbout = () => {
   const CardContent = [
@@ -60,9 +61,11 @@ const FeatureAbout = () => {
                   تجربة سكن استثنائية تجمع بين الاسترخاء والتميز.
                 </p>
               </div>
-              <button className="text-white bg-black py-2 px-4 rounded-md mt-2 lg:w-40 md:py-4 md:px-6">
-                شاهد احدث المشاريع
-              </button>
+              <Link href="/projects">
+                <button className="text-white bg-black py-2 px-4 rounded-md mt-2 lg:w-40 md:py-4 md:px-6">
+                  شاهد احدث المشاريع
+                </button>
+              </Link>
             </div>
           </div>
         </AosWrapper>
