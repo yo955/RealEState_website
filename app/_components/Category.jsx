@@ -5,10 +5,10 @@ const Category = () => {
       <div data-aos="fade-up">
         <section className="category container mb-40">
           <div className="w-full rounded-2xl py-8 bg-secondary mx-auto flex flex-col items-center justify-around p-4">
-            <h1 className="text-3xl font-bold font-sans text-center m-5">
+            <h1 className="text-3xl font-bold font-sans text-center m-5 text-black">
               مهتم بمشاريعنا القادمة؟
             </h1>
-            <button className="btn rounded-lg w-1/2 sm:w-32 font-sans h-12 bg-slate-900 text-black hover:bg-slate-800 transition duration-300">
+            <button className="btn rounded-lg w-1/2 sm:w-32 font-sans h-12 bg-slate-900 text-white hover:bg-slate-800 transition duration-300">
               تواصل معنا
             </button>
           </div>
