@@ -1,0 +1,74 @@
+[
+    {
+      "id": 1,
+      "status": "مباع",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "103"
+    },
+    {
+      "id": 2,
+      "status": "قريبا",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "105"
+    },
+    {
+      "id": 3,
+      "status": "متاح",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
+    },
+    {
+      "id": 4,
+      "status": "مباع",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
+    },
+    {
+      "id": 5,
+      "status": "قريبا",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
+    },
+    {
+      "id": 6,
+      "status": "متاح",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
+    },
+    {
+      "id": 7,
+      "status": "قريبا",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
+    },
+    {
+      "id": 8,
+      "status": "مباع",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
+    }
+  ]

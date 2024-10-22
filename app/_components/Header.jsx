@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react"; // استيراد useState لإدارة حالة القائمة
 
 const Header = () => {
@@ -15,16 +16,16 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between ">
           {/* اللوجو يظهر على اليسار في جميع الشاشات */}
           <div className="flex items-center gap-4">
-            <a className="block text-teal-600" href="#">
+            <Link className="block text-teal-600" href="/">
               <span className="sr-only">Home</span>
               <Image
                 className="z-10"
-                src="/logo.svg" 
+                src="/logo.svg"
                 alt="logo"
                 height={100}
                 width={100}
               />
-            </a>
+            </Link>
           </div>
 
           {/* أيقونة القائمة (Menu Icon) تظهر في الشاشات الصغيرة والمتوسطة */}
@@ -56,33 +57,35 @@ const Header = () => {
             <nav aria-label="Global">
               <ul className="flex items-center gap-6 text-sm font-bold">
                 <li>
-                  <a
+                  <Link
                     className="text-white transition hover:text-gray-500/75 text-xl"
-                    href="#"
+                    href="/"
                   >
                     الرئيسية
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
+                    href="about-us"
                     className="text-white transition hover:text-gray-500/75 text-xl"
-                    href="#"
                   >
                     من نحن
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="text-white transition hover:text-gray-500/75 text-xl"
-                    href="#"
+                    href="projects"
                   >
                     مشاريعنا
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a
+                    href="https://wa.me/201555909247" // استبدل "201012345678" برقمك الفعلي
                     className="text-white transition hover:text-gray-500/75 text-xl"
-                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     تواصل معنا
                   </a>
@@ -99,33 +102,35 @@ const Header = () => {
           <nav aria-label="Global">
             <ul className="flex flex-col items-end text-sm font-bold gap-4">
               <li>
-                <a
+                <Link
                   className="text-white transition hover:text-gray-500/75"
-                  href="#"
+                  href="/"
                 >
                   الرئيسية
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="text-white transition hover:text-gray-500/75"
-                  href="#"
+                  href="/about-us"
                 >
                   من نحن
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className="text-white transition hover:text-gray-500/75"
-                  href="#"
+                  href="/projects"
                 >
                   مشاريعنا
-                </a>
+                </Link>
               </li>
               <li>
                 <a
-                  className="text-white transition hover:text-gray-500/75"
-                  href="#"
+                  href="https://wa.me/201555909247" // استبدل "201012345678" برقمك الفعلي
+                  className="text-white transition hover:text-gray-500/75 text-xl"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   تواصل معنا
                 </a>
