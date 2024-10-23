@@ -25,6 +25,7 @@ const TypingAnimation = () => {
             delay: 0.5,
             text: "",
             onComplete: () => {
+              // eslint-disable-next-line react-hooks/exhaustive-deps
               currentIndex = (currentIndex + 1) % texts.length; // التبديل إلى الكلمة التالية
               typeText();
             },
@@ -36,6 +37,7 @@ const TypingAnimation = () => {
     typeText(); // بدء الأنيميشن
 
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       gsap.killTweensOf(textRef.current); // تنظيف الأنيميشن عند إلغاء المكون
     };
   }, [textRef]); // إضافة textRef كمراقب
