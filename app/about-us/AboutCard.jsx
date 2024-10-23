@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { FaHouse } from "react-icons/fa6";
 const AboutCard = ({ title, description, Icon }) => {
   return (
     <div className="w-full max-w-[300px] mx-auto bg-transparent border-transparent rounded-2xl p-6 hover:shadow-xl transition-shadow duration-300 ease-in-out min-h-[230px]">

@@ -2,6 +2,7 @@
 import { IoLocationSharp } from "react-icons/io5";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet"; 
 
 const MapComponent = () => {
   // إحداثيات الرياض
@@ -11,7 +12,7 @@ const MapComponent = () => {
     <MapContainer
       center={position}
       zoom={13}
-      style={{ height: "500px", width: "100%", marginBottom: "5rem" }}
+      className="h-64 w-full md:h-96 mb-20" 
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

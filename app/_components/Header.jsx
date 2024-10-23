@@ -22,13 +22,16 @@ const Header = () => {
           <div className="flex items-center gap-4">
             <Link className="block text-teal-600" href="/">
               <span className="sr-only">Home</span>
-              <Image
-                className="z-10"
-                src="/logo.svg"
-                alt="logo"
-                height={100}
-                width={100}
-              />
+              <div className="relative w-24 h-24">
+                {/* تأكد من تحديد عرض وارتفاع الحاوية */}
+                <Image
+                  className="z-10 object-contain"
+                  src="/logo.svg"
+                  alt="logo"
+                  fill // استخدم fill بدلاً من width و height
+                  sizes="100vw" // أضف sizes لتحديد الحجم النسبي
+                />
+              </div>
             </Link>
           </div>
 

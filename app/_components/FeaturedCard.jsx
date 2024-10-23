@@ -20,13 +20,14 @@ const Card = ({ status, imageUrl, location, projectName, projectNumber }) => {
           {status}
         </span>
 
-        <div className="relative w-full h-56 ">
+        <div className="relative w-full h-56">
           <Image
             src={imageUrl}
             alt="مشروع عقاري"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-2xl p-2"
+            fill
+            className="rounded-2xl p-2 object-cover"
+            priority // أضف هذه السمة إذا كانت الصورة تظهر في الجزء العلوي من الصفحة
+            sizes="100vw" // لضبط الحجم بشكل استجابة على جميع الأجهزة
           />
         </div>
 
