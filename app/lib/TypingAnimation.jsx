@@ -1,56 +1,53 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
+import React, { useEffect, useRef, useState } from "react";
 
-gsap.registerPlugin(TextPlugin);
-
-const TypingAnimation = () => {
+const TypingAnimation = ({ shouldAnimate }) => {
   const textRef = useRef(null);
   const texts = ["عمرانى", "عصرى", "متكامل"];
-  let currentIndex = 0;
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (!textRef.current) return;
+    if (!shouldAnimate || !textRef.current) {
+      return; // عدم بدء الأنيميشن إذا كان يجب عدم تشغيله أو العنصر غير موجود
+    }
+
+    let text = "";
+    let typingInterval;
 
     const typeText = () => {
-      const text = texts[currentIndex] + "_";
-      gsap.to(textRef.current, {
-        text: text,
-        duration: 0.5,
-        ease: "power1.inOut",
-        onComplete: () => {
-          gsap.to(textRef.current, {
-            duration: 0.5,
-            delay: 0.5,
-            text: "",
-            onComplete: () => {
-              // eslint-disable-next-line react-hooks/exhaustive-deps
-              currentIndex = (currentIndex + 1) % texts.length; // التبديل إلى الكلمة التالية
-              typeText();
-            },
-          });
-        },
-      });
+      if (text.length < texts[currentIndex].length) {
+        text += texts[currentIndex][text.length]; // إضافة حرف واحد في كل مرة
+        setDisplayedText(text);
+      } else {
+        clearInterval(typingInterval);
+        setTimeout(() => {
+          setDisplayedText(""); // إفراغ النص بعد تأخير
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length); // الانتقال للكلمة التالية
+          text = ""; // إعادة تعيين النص
+          typingInterval = setInterval(typeText, 200); // بدء الكتابة مرة أخرى
+        }, 1000); // تأخير قبل البدء في الكتابة مرة أخرى
+      }
     };
 
-    typeText(); // بدء الأنيميشن
+    typingInterval = setInterval(typeText, 200); // بدء الأنيميشن
 
     return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      gsap.killTweensOf(textRef.current); // تنظيف الأنيميشن عند إلغاء المكون
+      clearInterval(typingInterval); // تنظيف الأنيميشن عند إلغاء المكون
     };
-  }, [textRef]); // إضافة textRef كمراقب
+  }, [shouldAnimate, currentIndex]); // مراقبة currentIndex
 
   return (
-    <div className="flex ">
+    <div className="flex">
       <h1 className="text-[3.5em] sm:text-[5em] lg:text-[8.5em] text-white mr-4 ">
         نمو
-      </h1>{" "}
+      </h1>
       <div
         ref={textRef}
-        className=" font-medium text-[3.5em] sm:text-[5em] lg:text-[8.5em] text-white font-sans"
-      />
+        className="font-medium text-[3.5em] sm:text-[5em] lg:text-[8.5em] text-white font-sans"
+      >
+        {displayedText}
+      </div>
     </div>
   );
 };

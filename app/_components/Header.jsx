@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,18 +24,17 @@ const Header = () => {
             <Link className="block text-teal-600" href="/">
               <span className="sr-only">Home</span>
               <div className="relative w-24 h-24">
-                {/* تأكد من تحديد عرض وارتفاع الحاوية */}
                 <Image
                   className="z-10 object-contain"
                   src="/logo.svg"
-                  alt="logo"
+                  alt="شعار الموقع"
                   fill // استخدم fill بدلاً من width و height
-                  sizes="100vw" // أضف sizes لتحديد الحجم النسبي
+                  sizes="(max-width: 640px) 100vw, 50vw" // أضف sizes لتحديد الحجم النسبي
                 />
               </div>
             </Link>
           </div>
-
+          <ThemeToggle />
           {/* أيقونة القائمة (Menu Icon) تظهر في الشاشات الصغيرة والمتوسطة */}
           <div className="md:hidden flex items-center">
             <button

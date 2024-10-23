@@ -27,7 +27,7 @@ const Card = ({ status, imageUrl, location, projectName, projectNumber }) => {
             fill
             className="rounded-2xl p-2 object-cover"
             priority // أضف هذه السمة إذا كانت الصورة تظهر في الجزء العلوي من الصفحة
-            sizes="100vw" // لضبط الحجم بشكل استجابة على جميع الأجهزة
+            sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw" // تحديث sizes
           />
         </div>
 
