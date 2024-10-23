@@ -1,19 +1,23 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react"; // استيراد useState لإدارة حالة القائمة
+import { useState } from "react";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // حالة القائمة
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev); // عكس حالة القائمة عند النقر على الأيقونة
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false); // إغلاق القائمة
   };
 
   return (
-    <header className="bg-black py-6 ">
+    <header className="bg-black py-6">
       <div className="mx-auto max-w-screen-xl container">
-        <div className="flex h-16 items-center justify-between ">
+        <div className="flex h-16 items-center justify-between">
           {/* اللوجو يظهر على اليسار في جميع الشاشات */}
           <div className="flex items-center gap-4">
             <Link className="block text-teal-600" href="/">
@@ -82,7 +86,7 @@ const Header = () => {
                 </li>
                 <li>
                   <a
-                    href="https://wa.me/201555909247" // استبدل "201012345678" برقمك الفعلي
+                    href="https://wa.me/201555909247"
                     className="text-white transition hover:text-gray-500/75 text-xl"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -105,6 +109,7 @@ const Header = () => {
                 <Link
                   className="text-white transition hover:text-gray-500/75"
                   href="/"
+                  onClick={closeMenu} // غلق القائمة عند النقر على الرابط
                 >
                   الرئيسية
                 </Link>
@@ -113,6 +118,7 @@ const Header = () => {
                 <Link
                   className="text-white transition hover:text-gray-500/75"
                   href="/about-us"
+                  onClick={closeMenu} // غلق القائمة عند النقر على الرابط
                 >
                   من نحن
                 </Link>
@@ -121,16 +127,18 @@ const Header = () => {
                 <Link
                   className="text-white transition hover:text-gray-500/75"
                   href="/projects"
+                  onClick={closeMenu} // غلق القائمة عند النقر على الرابط
                 >
                   مشاريعنا
                 </Link>
               </li>
               <li>
                 <a
-                  href="https://wa.me/201555909247" // استبدل "201012345678" برقمك الفعلي
-                  className="text-white transition hover:text-gray-500/75 text-xl"
+                  href="https://wa.me/201555909247"
+                  className="text-white transition hover:text-gray-500/75"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={closeMenu} // غلق القائمة عند النقر على الرابط
                 >
                   تواصل معنا
                 </a>
