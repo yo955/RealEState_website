@@ -14,7 +14,7 @@ const Category = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="btn rounded-lg w-1/2 sm:w-32 font-sans h-12 bg-slate-900 text-white hover:bg-slate-800 transition duration-300">
+              <button className="btn rounded-lg p-2 w-full font-sans h-12 bg-slate-900 text-white hover:bg-slate-800 transition duration-300 ">
                 تواصل معنا
               </button>
             </a>
