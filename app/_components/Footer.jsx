@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <AosWrapper>
       <div data-aos="fade-up">
-        <footer className="bg-gray-900 text-white py-20 ">
+        <footer className="bg-gray-900 text-white py-20 dark:bg-black border dark:border-gray-700">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
             <div className="flex flex-col items-center order-3 md:order-1">
               <h3 className="text-xl font-bold mb-4">تابعنا</h3>

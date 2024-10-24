@@ -46,12 +46,12 @@ const FeatureAbout = () => {
         {/* النص والمحتوى على اليسار */}
         <AosWrapper>
           <div data-aos="fade-left">
-            <div className="bg-secondary w-full p-6 lg:p-8 rounded-xl flex flex-col justify-evenly h-full">
+            <div className="bg-secondary w-full p-6 lg:p-8 rounded-xl flex flex-col justify-evenly h-full dark:bg-black border dark:border-gray-600 dark:text-gray-100">
               <div>
-                <h1 className="font-bold font-sans text-2xl md:text-3xl mb-5">
+                <h1 className="font-bold font-sans text-2xl md:text-3xl mb-5 dark:text-white">
                   مميزات مشاريعنا
                 </h1>
-                <p className="text-sm md:text-base lg:text-lg text-slate-500 font-medium font-sans mb-5  dark:text-yellow-900 dark:font-bold">
+                <p className="text-sm md:text-base lg:text-lg text-slate-500 font-medium font-sans mb-5  dark:text-gray-200 dark:font-bold">
                   مشاريعنا المميزة تجمع بين تصاميم مبتكرة ووظائف عملية، مع
                   التركيز على تقديم جودة عالية تلبي تطلعاتك. نحن نبني بيئات
                   متكاملة تتضمن المرافق والخدمات التي تضفي راحة ورفاهية على
@@ -62,7 +62,7 @@ const FeatureAbout = () => {
                 </p>
               </div>
               <Link href="/projects">
-                <button className="text-white bg-black py-2 px-4 rounded-md mt-2 lg:w-40 md:py-4 md:px-6 ">
+                <button className="text-white bg-black py-2 px-4 rounded-md mt-2 lg:w-40 md:py-4 md:px-6 border dark:border-gray-500">
                   شاهد احدث المشاريع
                 </button>
               </Link>

@@ -33,7 +33,7 @@ const FeatureProjects = () => {
       {/* Buttons section */}
       <div className="flex flex-wrap justify-center items-center text-center mb-5 font-sans text-lg font-bold gap-4">
         <button
-          className={`px-4 py-2 rounded-md transition-all duration-300 ${
+          className={`px-4 py-2 rounded-md transition-all duration-300  ${
             filter === "all" ? "bg-orange-300" : "bg-gray-200 hover:bg-orange-300"
           }`}
           onClick={() => setFilter("all")}

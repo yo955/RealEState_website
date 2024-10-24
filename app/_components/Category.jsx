@@ -4,8 +4,8 @@ const Category = () => {
     <AosWrapper>
       <div data-aos="fade-up">
         <section className="category container my-40">
-          <div className="w-full rounded-2xl py-8 bg-secondary mx-auto flex flex-col items-center justify-around p-4">
-            <h1 className="text-3xl font-bold font-sans text-center m-5 text-black">
+          <div className="w-full rounded-2xl py-8 bg-secondary mx-auto flex flex-col items-center justify-around p-4 dark:bg-black dark:border-gray-600 border">
+            <h1 className="text-3xl font-bold font-sans text-center m-5 text-black dark:text-white">
               مهتم بمشاريعنا القادمة؟
             </h1>
             <a
