@@ -18,7 +18,7 @@ module.exports = {
         secondary: "#f7f6f2",
         mixed: "rgb(255,255,255)",
         dark:"#232A3C",
-        medium:"#293245",
+        medium:"#000000",
       },
     },
   },

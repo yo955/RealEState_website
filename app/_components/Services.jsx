@@ -30,7 +30,7 @@ const Services = () => {
       <div className="title text-center mb-8 mt-20">
         <AosWrapper>
           <div data-aos="fade-up">
-            <h1 className="font-sans font-medium text-3xl">خدماتنا</h1>
+            <h1 className="font-sans font-medium text-3xl dark:text-white">خدماتنا</h1>
           </div>
         </AosWrapper>
       </div>

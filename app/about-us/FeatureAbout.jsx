@@ -51,7 +51,7 @@ const FeatureAbout = () => {
                 <h1 className="font-bold font-sans text-2xl md:text-3xl mb-5">
                   مميزات مشاريعنا
                 </h1>
-                <p className="text-sm md:text-base lg:text-lg text-slate-500 font-medium font-sans mb-5">
+                <p className="text-sm md:text-base lg:text-lg text-slate-500 font-medium font-sans mb-5  dark:text-yellow-900 dark:font-bold">
                   مشاريعنا المميزة تجمع بين تصاميم مبتكرة ووظائف عملية، مع
                   التركيز على تقديم جودة عالية تلبي تطلعاتك. نحن نبني بيئات
                   متكاملة تتضمن المرافق والخدمات التي تضفي راحة ورفاهية على
@@ -62,7 +62,7 @@ const FeatureAbout = () => {
                 </p>
               </div>
               <Link href="/projects">
-                <button className="text-white bg-black py-2 px-4 rounded-md mt-2 lg:w-40 md:py-4 md:px-6">
+                <button className="text-white bg-black py-2 px-4 rounded-md mt-2 lg:w-40 md:py-4 md:px-6 ">
                   شاهد احدث المشاريع
                 </button>
               </Link>

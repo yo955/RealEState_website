@@ -3,7 +3,7 @@ import TypingAnimation from "../lib/TypingAnimation";
 const HeroSection = () => {
   const shouldAnimate = true; // سيتم تشغيل الأنيميشن هنا
   return (
-    <section className="w-full bg-black px-4 sm:px-16 lg:px-28 py-10">
+    <section className="w-full bg-gray-900 px-4 dark:bg-black sm:px-16 lg:px-28 py-10">
       <div className="max-w-full mx-auto flex flex-col items-start">
         <TypingAnimation shouldAnimate={shouldAnimate} />
         <div className="w-full sm:w-[70%] lg:w-[63%] pt-[43px] pb-[30px]">

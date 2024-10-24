@@ -16,7 +16,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-black py-6">
+    <header className=" py-6 bg-gray-900 dark:bg-black ">
       <div className="mx-auto max-w-screen-xl container">
         <div className="flex h-16 items-center justify-between">
           {/* اللوجو يظهر على اليسار في جميع الشاشات */}
@@ -36,7 +36,7 @@ const Header = () => {
           </div>
           <ThemeToggle />
           {/* أيقونة القائمة (Menu Icon) تظهر في الشاشات الصغيرة والمتوسطة */}
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center ">
             <button
               onClick={toggleMenu}
               className="text-white focus:outline-none"
@@ -105,7 +105,7 @@ const Header = () => {
 
       {/* قائمة الهواتف تظهر في الشاشات الصغيرة */}
       {isMenuOpen && (
-        <div className="md:hidden bg-black p-4">
+        <div className="md:hidden  bg-gray-900 dark:bg-black p-4">
           <nav aria-label="Global">
             <ul className="flex flex-col items-end text-sm font-bold gap-4">
               <li>

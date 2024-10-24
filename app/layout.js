@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="ar" dir="rtl">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-medium `}
       >
         <Header />
         <main className=" w-full min-h-screen">{children}</main>
