@@ -70,5 +70,23 @@
       "location": "الرياض - العقيق",
       "projectName": "نمو",
       "projectNumber": "107"
+    },
+    {
+      "id": 9,
+      "status": "مباع",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
+    },
+    {
+      "id": 10,
+      "status": "مباع",
+      "imageUrl":
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2672&auto=format&fit=crop",
+      "location": "الرياض - العقيق",
+      "projectName": "نمو",
+      "projectNumber": "107"
     }
   ]
