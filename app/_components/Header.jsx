@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import ThemeToggle from "../ThemeToggle";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
