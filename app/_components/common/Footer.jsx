@@ -1,7 +1,7 @@
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-import AosWrapper from "../lib/ScrollAnimation";
+import AosWrapper from "@/app/lib/ScrollAnimation";
 
 const Footer = () => {
   return (
