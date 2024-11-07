@@ -1,6 +1,7 @@
 import styles from "./sidebar.module.css";
 import MenuLink from "./menuLink/MenuLink";
 import Image from "next/image";
+import Link from "next/link";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
@@ -104,10 +105,12 @@ const Sidebar = () => {
           );
         })}
       </ul>
-      <div className={styles.logout}>
-        <MdLogout />
-        Logout
-      </div>
+      <Link href="/login">
+        <div className={styles.logout}>
+          <MdLogout />
+          Logout
+        </div>
+      </Link>
     </div>
   );
 };
