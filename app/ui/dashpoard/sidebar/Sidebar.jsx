@@ -1,0 +1,115 @@
+import styles from "./sidebar.module.css";
+import MenuLink from "./menuLink/MenuLink";
+import Image from "next/image";
+import {
+  MdDashboard,
+  MdSupervisedUserCircle,
+  MdShoppingBag,
+  MdAttachMoney,
+  MdWork,
+  MdAnalytics,
+  MdPeople,
+  MdOutlineSettings,
+  MdHelpCenter,
+  MdLogout,
+} from "react-icons/md";
+const menuItems = [
+  {
+    title: "pages",
+    list: [
+      {
+        title: "Dashboard",
+        path: "/dashpoard",
+        icon: <MdDashboard />,
+      },
+      {
+        title: "users",
+        path: "/dashpoard/users",
+        icon: <MdSupervisedUserCircle />,
+      },
+      {
+        title: "products",
+        path: "/dashpoard/products",
+        icon: <MdShoppingBag />,
+      },
+      {
+        title: "Transactions",
+        path: "/dashpoard/transactions",
+        icon: <MdAttachMoney />,
+      },
+    ],
+  },
+  {
+    title: "Analytics",
+    list: [
+      {
+        title: "Revenue",
+        path: "/dashpoard/revenu",
+        icon: <MdWork />,
+      },
+      {
+        title: "Reports",
+        path: "/dashpoard/reports",
+        icon: <MdAnalytics />,
+      },
+      {
+        title: "Teams",
+        path: "/dashpoard/teams",
+        icon: <MdPeople />,
+      },
+    ],
+  },
+  {
+    title: "User",
+    list: [
+      {
+        title: "Settings",
+        path: "/dashpoard/settings",
+        icon: <MdOutlineSettings />,
+      },
+      {
+        title: "Help",
+        path: "/dashpoard/help",
+        icon: <MdHelpCenter />,
+      },
+    ],
+  },
+];
+
+const Sidebar = () => {
+  return (
+    <div className={styles.container}>
+      <div className={styles.user}>
+        <Image
+          className={styles.userImage}
+          src="/noavatar.png"
+          alt="userImage"
+          height={50}
+          width={50}
+        />
+        <div className={styles.userDetails}>
+          <span className={styles.username}>Joo</span>
+          <span className={styles.userTitle}>Administrator</span>
+        </div>
+      </div>
+      <ul className={styles.list}>
+        {menuItems.map((cat) => {
+          return (
+            <li key={cat.title}>
+              <span className={styles.cat}>{cat.title}</span>
+              {cat.list.map((item) => {
+                return <MenuLink key={item.title} item={item} />;
+              })}
+            </li>
+          );
+        })}
+      </ul>
+      <div className={styles.logout}>
+        <MdLogout />
+        Logout
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;
