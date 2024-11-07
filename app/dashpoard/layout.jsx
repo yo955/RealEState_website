@@ -1,4 +1,4 @@
-import React from "react";
+import "@/app/ui/dashpoard-globals.css"
 import styles from "../ui/dashpoard/dashboard.module.css";
 import Sidebar from "../ui/dashpoard/sidebar/Sidebar";
 import Navbar from "../ui/dashpoard/navbar/Navbar";
