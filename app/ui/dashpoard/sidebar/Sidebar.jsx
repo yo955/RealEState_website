@@ -35,7 +35,7 @@ const menuItems = [
       },
       {
         title: "Transactions",
-        path: "/dashpoard/transactions",
+        path: "",
         icon: <MdAttachMoney />,
       },
     ],
@@ -45,17 +45,17 @@ const menuItems = [
     list: [
       {
         title: "Revenue",
-        path: "/dashpoard/revenu",
+        path: "",
         icon: <MdWork />,
       },
       {
         title: "Reports",
-        path: "/dashpoard/reports",
+        path: "",
         icon: <MdAnalytics />,
       },
       {
         title: "Teams",
-        path: "/dashpoard/teams",
+        path: "",
         icon: <MdPeople />,
       },
     ],
@@ -65,12 +65,12 @@ const menuItems = [
     list: [
       {
         title: "Settings",
-        path: "/dashpoard/settings",
+        path: "",
         icon: <MdOutlineSettings />,
       },
       {
         title: "Help",
-        path: "/dashpoard/help",
+        path: "",
         icon: <MdHelpCenter />,
       },
     ],
