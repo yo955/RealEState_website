@@ -1,9 +1,32 @@
-import styles from "@/app/ui/dashpoard//products/products.module.css";
+"use client";
+import styles from "@/app/ui/dashpoard/products/products.module.css";
 import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "@/app/ui/dashpoard/search/Search";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const ProductsPage = () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const [compound, setCompound] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/compound`)
+      .then((response) => {
+        setCompound(response.data);
+        console.log("Compound data:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const trimText = (text) => {
+    return text.slice(0, 10);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -15,45 +38,60 @@ const ProductsPage = () => {
       <table className={styles.table}>
         <thead>
           <tr>
+            <td>Img</td>
             <td>Title</td>
-            <td>Description</td>
-            <td>Price</td>
+            <td>Location</td>
+            <td>Status</td>
             <td>Created At</td>
-            <td>Stock</td>
+            <td>Updated At</td>
             <td>Action</td>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className={styles.product}>
-                <Image
-                  src="/noproduct.jpg"
-                  alt="avatar"
-                  width={40}
-                  height={40}
-                  className={styles.productImage}
-                />
-                iphone
-              </div>
-            </td>
-            <td>this is mopile phone</td>
-            <td>123$</td>
-            <td>oct 29 2023</td>
-            <td>34</td>
-            <td>
-              <div className={styles.buttons}>
-                <Link href="/dashpoard/products/test">
-                  <button className={`${styles.button} ${styles.view}`}>
-                    View
-                  </button>
-                </Link>
-                <button className={`${styles.button} ${styles.delete}`}>
-                  Delete
-                </button>
-              </div>
-            </td>
-          </tr>
+          {compound.length === 0 ? (
+            <tr>
+              <td colSpan="7" className={styles.noData}>
+                No data available
+              </td>
+            </tr>
+          ) : (
+            compound.map((product) => (
+              <tr key={product.id}>
+                <td>
+                  <div className={styles.product}>
+                    <Image
+                      src={
+                        product.mainImage
+                          ? `/${product.mainImage}`
+                          : "/noproduct.jpg"
+                      }
+                      alt={product.title}
+                      width={40}
+                      height={40}
+                      className={styles.productImage}
+                    />
+                  </div>
+                </td>
+                <td>{product.title}</td>
+                <td>{product.location}</td>
+                <td>{product.status}</td>
+                <td>{trimText(product.createdAt)}</td>
+                <td>{trimText(product.updatedAt)}</td>
+                <td>
+                  <div className={styles.buttons}>
+                    <Link href={`/dashpoard/products/${product._id}`}>
+                      <button className={`${styles.button} ${styles.view}`}>
+                        View
+                      </button>
+                    </Link>
+                    <button className={`${styles.button} ${styles.delete}`}>
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
       <Pagination />

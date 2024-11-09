@@ -1,6 +1,24 @@
+"use client";
 import styles from "@/app/ui/dashpoard/products/singleproduct/singleproduct.module.css";
+import axios from "axios";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import { useState,useEffect } from "react";
 const SingleProductPage = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/compound/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        setProduct(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
