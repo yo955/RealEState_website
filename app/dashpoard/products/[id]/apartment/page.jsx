@@ -11,7 +11,7 @@ import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 const ApartmentPage = () => {
   const { id } = useParams();
 
-  const [apartment, setApartment] = useState([]);
+  const [apartments, setApartments] = useState([]);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -19,7 +19,7 @@ const ApartmentPage = () => {
     axios
       .get(`${apiUrl}/apartment/${id}`)
       .then((res) => {
-        setApartment(res.data);
+        setApartments(res.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -47,19 +47,19 @@ const ApartmentPage = () => {
           </tr>
         </thead>
         <tbody>
-          {apartment.length === 0 ? (
+          {apartments.length === 0 ? (
             <tr>
               <td colSpan="7" className={styles.noData}>
                 No Apartment available
               </td>
             </tr>
           ) : (
-            apartment.map((item) => (
-              <tr key={item._id}>
+            apartments.map((apartment) => (
+              <tr key={apartment._id}>
                 <td>
                   <div className={styles.product}>
                     <Image
-                      src={`/${item.mainImage}` || "/noproduct.jpg"}
+                      src={`/${apartment.mainImage}` || "/noproduct.jpg"}
                       alt="ApartmentImg"
                       width={40}
                       height={40}
@@ -67,15 +67,15 @@ const ApartmentPage = () => {
                     />
                   </div>
                 </td>
-                <td>{item.rooms}</td>
-                <td>{item.space}</td>
-                <td>{item.bathrooms}</td>
-                <td>{item.description}</td>
-                <td>{item.status}</td>
+                <td>{apartment.rooms}</td>
+                <td>{apartment.space}</td>
+                <td>{apartment.bathrooms}</td>
+                <td>{apartment.description}</td>
+                <td>{apartment.status}</td>
                 <td>
                   <div className={styles.buttons}>
                     <Link
-                      href={`/dashpoard/products/${id}/apartment/${item._id}`}
+                      href={`/dashpoard/products/${id}/apartment/${apartment._id}`}
                     >
                       <button className={`${styles.button} ${styles.view}`}>
                         View

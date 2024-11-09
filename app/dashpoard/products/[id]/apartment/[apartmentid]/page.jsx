@@ -9,11 +9,13 @@ const SingleApartmentPage = () => {
   const { apartmentid } = useParams();
   console.log("apartment: " + apartmentid);
 
-  const [product, setProduct] = useState({
-    title: "",
-    location: "",
-    status: "",
+  const [apartment, setApartment] = useState({
     mainImage: "",
+    rooms: "",
+    space: "",
+    bathrooms: "",
+    status: "",
+    description: "",
   });
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -22,7 +24,7 @@ const SingleApartmentPage = () => {
     axios
       .get(`${apiUrl}/apartment/find/${apartmentid}`)
       .then((res) => {
-        setProduct(res.data);
+        setApartment(res.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -31,21 +33,10 @@ const SingleApartmentPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
+    setProduct((prevApartment) => ({
+      ...prevApartment,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.put(`${apiUrl}/apartment/update/${apartmentid}`, product);
-      alert("Apartment updated successfully!");
-    } catch (error) {
-      console.error("Error updating apartment:", error);
-      alert("Failed to update apartment.");
-    }
   };
 
   return (
@@ -53,43 +44,61 @@ const SingleApartmentPage = () => {
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src={product.mainImage ? `${apiUrl}/${product.mainImage}` : "/noavatar.jpg"}
+            src={
+              apartment.mainImage ? `/${apartment.mainImage}` : "/noavatar.jpg"
+            }
             alt="productImage"
             fill
             className={styles.userImg}
           />
         </div>
-        {product.title || "Loading..."}
+        {apartment.status || "Loading..."}
       </div>
       <div className={styles.formContainer}>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label>Title</label>
+        <form className={styles.form}>
+          <label>Rooms</label>
           <input
             type="text"
-            name="title"
-            placeholder="Title"
-            value={product.title}
+            name="Rooms"
+            placeholder="Romms"
+            value={apartment.rooms}
             onChange={handleChange}
           />
-          <label>Location</label>
+          <label>Space</label>
           <input
             type="text"
-            name="location"
-            placeholder="Location"
-            value={product.location}
+            name="Space"
+            placeholder="Space"
+            value={apartment.space}
+            onChange={handleChange}
+          />
+          <label>Bathrooms</label>
+          <input
+            type="text"
+            name="Bathrooms"
+            placeholder="Bathrooms"
+            value={apartment.bathrooms}
             onChange={handleChange}
           />
           <label>Status</label>
           <select
-            name="status"
-            id="status"
-            value={product.status}
+            name="Status"
+            id="Status"
+            value={apartment.status}
             onChange={handleChange}
           >
             <option value="available">Available</option>
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
+          <textarea
+            name="desc"
+            id="desc"
+            value={apartment.description}
+            onChange={handleChange}
+            placeholder="Description"
+            rows={5}
+          ></textarea>
           <button type="submit">Update</button>
         </form>
       </div>
