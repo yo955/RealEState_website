@@ -3,14 +3,22 @@ import styles from "@/app/ui/dashpoard/products/singleproduct/singleproduct.modu
 import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+
 const SingleProductPage = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({
+    title: "",
+    location: "",
+    status: "",
+    mainImage: "",
+  });
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {
     axios
-      .get(`${apiUrl}/compound/${id}`)
+      .get(`${apiUrl}/compound/find/${id}`)
       .then((res) => {
         console.log(res.data);
         setProduct(res.data);
@@ -18,45 +26,58 @@ const SingleProductPage = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [id]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src="/noproduct.jpg"
+            src={product.mainImage ? `/${product.mainImage}` : "/noavatar.jpg"}
             alt="productImage"
             fill
             className={styles.userImg}
           />
         </div>
-        Iphone
+        {product.title}
       </div>
       <div className={styles.formContainer}>
         <form action="" className={styles.form}>
           <label>Title</label>
-          <input type="text" name="title" placeholder="title" />
-          <label>Price</label>
-          <input type="number" name="price" placeholder="price" />
-          <label>Stock</label>
-          <input type="text" name="stock" placeholder="23" />
-          <label>Color</label>
-          <input type="text" name="Color" placeholder="Choose the color" />
-          <label>Size</label>
-          <input type="text" name="size" placeholder="21" />
-          <textarea type="text" name="size" placeholder=""></textarea>
-          <label>Cat</label>
-          <select name="cat" id="cat">
-            <option value="kitchen">kitchen</option>
-            <option value="computer">computer</option>
+          <input
+            type="text"
+            name="title"
+            placeholder="title"
+            value={product.title}
+            onChange={handleChange}
+          />
+          <label>Location</label>
+          <input
+            type="text"
+            name="location"
+            placeholder="location"
+            value={product.location}
+            onChange={handleChange}
+          />
+          <label>Status</label>
+          <select
+            name="status"
+            id="status"
+            value={product.status}
+            onChange={handleChange}
+          >
+            <option value="available">Available</option>
+            <option value="soon">Soon</option>
+            <option value="sold">Sold</option>
           </select>
-          <label>Description</label>
-          <textarea
-            name="desc"
-            id="desc"
-            placeholder="description"
-            rows="10"
-          ></textarea>
           <button>Update</button>
         </form>
       </div>
