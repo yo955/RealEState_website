@@ -33,10 +33,21 @@ const SingleApartmentPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prevApartment) => ({
+    setApartment((prevApartment) => ({
       ...prevApartment,
-      [name]: value,
+      [name.toLowerCase()]: value,
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment);
+      alert("Apartment updated successfully!");
+    } catch (error) {
+      console.error("Error updating apartment:", error);
+      alert("Failed to update apartment.");
+    }
   };
 
   return (
@@ -44,9 +55,7 @@ const SingleApartmentPage = () => {
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src={
-              apartment.mainImage ? `/${apartment.mainImage}` : "/noavatar.jpg"
-            }
+            src={apartment.mainImage ? `/${apartment.mainImage}` : "/noavatar.jpg"}
             alt="productImage"
             fill
             className={styles.userImg}
@@ -55,35 +64,35 @@ const SingleApartmentPage = () => {
         {apartment.status || "Loading..."}
       </div>
       <div className={styles.formContainer}>
-        <form className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <label>Rooms</label>
           <input
-            type="text"
-            name="Rooms"
-            placeholder="Romms"
+            type="number"
+            name="rooms"
+            placeholder="Rooms"
             value={apartment.rooms}
             onChange={handleChange}
           />
           <label>Space</label>
           <input
-            type="text"
-            name="Space"
+            type="number"
+            name="space"
             placeholder="Space"
             value={apartment.space}
             onChange={handleChange}
           />
           <label>Bathrooms</label>
           <input
-            type="text"
-            name="Bathrooms"
+            type="number"
+            name="bathrooms"
             placeholder="Bathrooms"
             value={apartment.bathrooms}
             onChange={handleChange}
           />
           <label>Status</label>
           <select
-            name="Status"
-            id="Status"
+            name="status"
+            id="status"
             value={apartment.status}
             onChange={handleChange}
           >
@@ -91,9 +100,10 @@ const SingleApartmentPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
+          <label>Description</label>
           <textarea
-            name="desc"
-            id="desc"
+            name="description"
+            id="description"
             value={apartment.description}
             onChange={handleChange}
             placeholder="Description"
