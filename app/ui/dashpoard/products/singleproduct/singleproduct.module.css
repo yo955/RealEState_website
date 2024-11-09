@@ -54,3 +54,13 @@
   cursor: pointer;
   margin-top: 20px;
 }
+.AddApartmentBtn {
+  width: 100%;
+  padding: 20px;
+  background-color: teal;
+  color: var(--text);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}

@@ -4,9 +4,11 @@ import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-const SingleProductPage = () => {
-  const { id } = useParams();
+
+const SingleApartmentPage = () => {
+  const { apartmentid } = useParams();
+  console.log("apartment: " + apartmentid);
+
   const [product, setProduct] = useState({
     title: "",
     location: "",
@@ -18,14 +20,14 @@ const SingleProductPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}/compound/find/${id}`)
+      .get(`${apiUrl}/apartment/find/${apartmentid}`)
       .then((res) => {
         setProduct(res.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [id]);
+  }, [apartmentid]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,26 +37,37 @@ const SingleProductPage = () => {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`${apiUrl}/apartment/update/${apartmentid}`, product);
+      alert("Apartment updated successfully!");
+    } catch (error) {
+      console.error("Error updating apartment:", error);
+      alert("Failed to update apartment.");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src={product.mainImage ? `/${product.mainImage}` : "/noavatar.jpg"}
+            src={product.mainImage ? `${apiUrl}/${product.mainImage}` : "/noavatar.jpg"}
             alt="productImage"
             fill
             className={styles.userImg}
           />
         </div>
-        {product.title}
+        {product.title || "Loading..."}
       </div>
       <div className={styles.formContainer}>
-        <form action="" className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <label>Title</label>
           <input
             type="text"
             name="title"
-            placeholder="title"
+            placeholder="Title"
             value={product.title}
             onChange={handleChange}
           />
@@ -62,7 +75,7 @@ const SingleProductPage = () => {
           <input
             type="text"
             name="location"
-            placeholder="location"
+            placeholder="Location"
             value={product.location}
             onChange={handleChange}
           />
@@ -77,15 +90,11 @@ const SingleProductPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
-          <button>Update</button>
+          <button type="submit">Update</button>
         </form>
-        {/* Go TO Add Appartament */}
-        <Link href={`/dashpoard/products/${id}/apartment`}>
-          <button className={styles.AddApartmentBtn}>Add an apartment</button>
-        </Link>
       </div>
     </div>
   );
 };
 
-export default SingleProductPage;
+export default SingleApartmentPage;
