@@ -1,3 +1,4 @@
+"use client";
 import styles from "./sidebar.module.css";
 import MenuLink from "./menuLink/MenuLink";
 import Image from "next/image";
@@ -14,6 +15,8 @@ import {
   MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 const menuItems = [
   {
     title: "pages",
@@ -78,6 +81,16 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+  const router = useRouter();
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const checkUser = localStorage.getItem("user");
+    if (checkUser) {
+      setUser(JSON.parse(checkUser));
+    }else{
+      router.push("/login")
+    }
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -89,8 +102,8 @@ const Sidebar = () => {
           width={50}
         />
         <div className={styles.userDetails}>
-          <span className={styles.username}>Joo</span>
-          <span className={styles.userTitle}>Administrator</span>
+          <span className={styles.username}>userName: {user.username}</span>
+          <span className={styles.userTitle}>Rule: {user.rule}</span>
         </div>
       </div>
       <ul className={styles.list}>

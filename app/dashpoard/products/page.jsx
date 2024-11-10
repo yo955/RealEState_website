@@ -16,7 +16,6 @@ const ProductsPage = () => {
       .get(`${apiUrl}/compound`)
       .then((response) => {
         setCompound(response.data);
-        console.log("Compound data:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -56,7 +55,7 @@ const ProductsPage = () => {
             </tr>
           ) : (
             compound.map((product) => (
-              <tr key={product.id}>
+              <tr key={product._id}>
                 <td>
                   <div className={styles.product}>
                     <Image
