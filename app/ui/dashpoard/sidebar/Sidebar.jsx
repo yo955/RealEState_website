@@ -87,6 +87,7 @@ const Sidebar = () => {
     const checkUser = localStorage.getItem("user");
     if (checkUser) {
       setUser(JSON.parse(checkUser));
+      router.push("/dashpoard")
     }else{
       router.push("/login")
     }

@@ -3,16 +3,16 @@ import ProjectsCard from "../_components/FeaturedCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AosWrapper from "../lib/ScrollAnimation";
-
+import Link from "next/link";
 const FeatureProjects = () => {
   const [filter, setFilter] = useState("all");
   const [productsData, setProductsData] = useState([]);
-
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   // جلب البيانات باستخدام Axios
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("/data/products.json"); // المسار إلى ملف JSON في public
+        const response = await axios.get(`${apiUrl}/compound`);
         setProductsData(response.data);
       } catch (error) {
         console.error("Error fetching the products:", error);
@@ -34,7 +34,9 @@ const FeatureProjects = () => {
       <div className="flex flex-wrap justify-center items-center text-center mb-5 font-sans text-lg font-bold gap-4">
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300  ${
-            filter === "all" ? "bg-orange-300" : "bg-gray-200 hover:bg-orange-300"
+            filter === "all"
+              ? "bg-orange-300"
+              : "bg-gray-200 hover:bg-orange-300"
           }`}
           onClick={() => setFilter("all")}
         >
@@ -42,25 +44,31 @@ const FeatureProjects = () => {
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "مباع" ? "bg-orange-300" : "bg-gray-200 hover:bg-orange-300"
+            filter === "مباع"
+              ? "bg-orange-300"
+              : "bg-gray-200 hover:bg-orange-300"
           }`}
-          onClick={() => setFilter("مباع")}
+          onClick={() => setFilter("sold")}
         >
           مباع
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "قريبا" ? "bg-orange-300" : "bg-gray-200 hover:bg-orange-300"
+            filter === "قريبا"
+              ? "bg-orange-300"
+              : "bg-gray-200 hover:bg-orange-300"
           }`}
-          onClick={() => setFilter("قريبا")}
+          onClick={() => setFilter("soon")}
         >
           قريبا
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "متاح" ? "bg-orange-300" : "bg-gray-200 hover:bg-orange-300"
+            filter === "متاح"
+              ? "bg-orange-300"
+              : "bg-gray-200 hover:bg-orange-300"
           }`}
-          onClick={() => setFilter("متاح")}
+          onClick={() => setFilter("available")}
         >
           متاح
         </button>
@@ -71,14 +79,15 @@ const FeatureProjects = () => {
         <div data-aos="fade-down">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product) => (
-              <ProjectsCard
-                key={product.id}
-                status={product.status}
-                imageUrl={product.imageUrl}
-                location={product.location}
-                projectName={product.projectName}
-                projectNumber={product.projectNumber}
-              />
+              <Link href={`/projects/${product._id}?image=${product.mainImage}`} key={product._id}>
+                <ProjectsCard
+                  key={product._id}
+                  status={product.status}
+                  imageUrl={product.mainImage}
+                  location={product.location}
+                  projectName={product.title}
+                />
+              </Link>
             ))}
           </div>
         </div>

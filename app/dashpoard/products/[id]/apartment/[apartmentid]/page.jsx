@@ -22,7 +22,7 @@ const SingleApartmentPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}/apartment/find/${apartmentid}`)
+      .get(`${apiUrl}/apartment/find/${apartmentid}`, { withCredentials: true })
       .then((res) => {
         setApartment(res.data);
       })
@@ -55,7 +55,9 @@ const SingleApartmentPage = () => {
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src={apartment.mainImage ? `/${apartment.mainImage}` : "/noavatar.jpg"}
+            src={
+              apartment.mainImage ? `/${apartment.mainImage}` : "/noavatar.jpg"
+            }
             alt="productImage"
             fill
             className={styles.userImg}

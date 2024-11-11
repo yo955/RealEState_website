@@ -25,20 +25,15 @@ const LoginPage = () => {
         { username, password },
         { withCredentials: true }
       );
-
+      console.log(res);
       const user = res.data;
       localStorage.setItem("user", JSON.stringify(user));
-
       // Redirect to dashboard
-      router.push("/dashboard"); // Fixed typo
-
-      // Fetch user details (optional)
-      // const userRes = await axios.get(`${apiUrl}/user/me`);
-      // console.log(userRes.data);
+      router.push("/dashpoard");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 

@@ -73,7 +73,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    href="about-us"
+                    href="/about-us"
                     className="text-white transition hover:text-gray-500/75 text-xl"
                   >
                     من نحن
@@ -82,7 +82,7 @@ const Header = () => {
                 <li>
                   <Link
                     className="text-white transition hover:text-gray-500/75 text-xl"
-                    href="projects"
+                    href="/projects"
                   >
                     مشاريعنا
                   </Link>
