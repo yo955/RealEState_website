@@ -1,10 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useParams } from "next/navigation";
 const HeroSection = () => {
-  const { ProductsDetails } = useParams();
-  console.log(ProductsDetails);
-
   const searchParams = useSearchParams();
   const image = searchParams.get("image");
   console.log(image);
