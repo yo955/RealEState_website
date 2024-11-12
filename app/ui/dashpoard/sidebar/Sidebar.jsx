@@ -15,8 +15,8 @@ import {
   MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+
+import axios from "axios";
 const menuItems = [
   {
     title: "pages",
@@ -81,17 +81,23 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
-  const router = useRouter();
-  const [user, setUser] = useState("");
-  useEffect(() => {
-    const checkUser = localStorage.getItem("user");
-    if (checkUser) {
-      setUser(JSON.parse(checkUser));
-      router.push("/dashpoard")
-    }else{
-      router.push("/login")
+  const logoutUser = async (req, res) => {
+    try {
+      const response = await axios.post(
+        "https://real-state-liard.vercel.app/user/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data); 
+    } catch (error) {
+      console.error("Logout error:", error.message);
     }
-  }, []);
+  };
+  
+ 
+ 
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -103,8 +109,8 @@ const Sidebar = () => {
           width={50}
         />
         <div className={styles.userDetails}>
-          <span className={styles.username}>userName: {user.username}</span>
-          <span className={styles.userTitle}>Rule: {user.rule}</span>
+          <span className={styles.username}>userName: user</span>
+          <span className={styles.userTitle}>Rule: admin</span>
         </div>
       </div>
       <ul className={styles.list}>
@@ -119,12 +125,12 @@ const Sidebar = () => {
           );
         })}
       </ul>
-      <Link href="/login">
-        <div className={styles.logout}>
+     <Link href="/login">
+        <div className={styles.logout} onClick={logoutUser}>
           <MdLogout />
           Logout
         </div>
-      </Link>
+        </Link>
     </div>
   );
 };

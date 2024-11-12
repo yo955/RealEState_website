@@ -3,9 +3,13 @@ import Chart from "../ui/dashpoard/chart/Chart";
 import styles from "@/app/ui/dashpoard/dashboard.module.css";
 import Righbar from "../ui/dashpoard/rightbar//Rightbar";
 import Transactions from "../ui/dashpoard/transactions/Transactions";
+
 const Dashboard = () => {
   return (
-    <div className={styles.wrapper}>
+    <>
+   
+      
+      <div className={styles.wrapper}>
       <div className={styles.main}>
         <div className={styles.Cards}>
           <Card />
@@ -19,6 +23,9 @@ const Dashboard = () => {
         <Righbar />
       </div>
     </div>
+  
+    </>
+  
   );
 };
 

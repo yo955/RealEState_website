@@ -1,11 +1,20 @@
 "use client";
 import styles from "@/app/ui/login/login.module.css";
 import "@/app/ui/dashpoard-globals.css";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { Auth } from "../dashpoard/Middleware";
+
+
 
 const LoginPage = () => {
+const user = useContext(Auth)
+
+if(user?._id){
+  redirect("/dashpoard")
+}
+ 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);

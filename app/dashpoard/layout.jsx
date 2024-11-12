@@ -1,11 +1,17 @@
 import "@/app/ui/dashpoard-globals.css"
-import styles from "../ui/dashpoard/dashboard.module.css";
+import styles from "@/app/ui/dashpoard/dashboard.module.css"
 import Sidebar from "../ui/dashpoard/sidebar/Sidebar";
 import Navbar from "../ui/dashpoard/navbar/Navbar";
 import Footer from "../ui/dashpoard/footer/Footer";
-const layout = ({ children }) => {
+import Context from "./Context";
+import Middleware from "./Middleware";
+const Layout = ({ children }) => {
+ 
   return (
-    <div className={styles.container}>
+    <>
+    <Middleware>
+      <Context>
+      <div className={styles.container}>
       <div className={styles.menu}>
         <Sidebar />
       </div>
@@ -15,7 +21,12 @@ const layout = ({ children }) => {
         <Footer />
       </div>
     </div>
+      </Context>
+    </Middleware>
+     
+    </>
+   
   );
 };
 
-export default layout;
+export default Layout;
