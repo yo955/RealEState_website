@@ -42,7 +42,7 @@ const SingleApartmentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment);
+      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment,{withCredentials : true});
       alert("Apartment updated successfully!");
     } catch (error) {
       console.error("Error updating apartment:", error);
