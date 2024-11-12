@@ -1,15 +1,7 @@
-"use client"
-import React from 'react'
-import { useContext } from 'react'
-import { Auth } from './Middleware'
-import { redirect } from 'next/dist/server/api-utils'
+"use client";
 
-const Context = ({children}) => {
- const user = useContext(Auth)
+const Context = ({ children }) => {
+  return <div>{children}</div>;
+};
 
-  return (
-    <div>{children}</div>
-  )
-}
-
-export default Context
+export default Context;

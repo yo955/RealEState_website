@@ -38,7 +38,7 @@ if(isLoading){
     return <div>...loading</div>
 }
 if(!user?._id){
-    // redirect("/login")
+    redirect("/login")
 }
   return (
     <Auth.Provider value={user}>{children}</Auth.Provider>
