@@ -44,7 +44,7 @@ const FeatureProjects = () => {
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "مباع"
+            filter === "sold"
               ? "bg-orange-300"
               : "bg-gray-200 hover:bg-orange-300"
           }`}
@@ -54,7 +54,7 @@ const FeatureProjects = () => {
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "قريبا"
+            filter === "soon"
               ? "bg-orange-300"
               : "bg-gray-200 hover:bg-orange-300"
           }`}
@@ -64,7 +64,7 @@ const FeatureProjects = () => {
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "متاح"
+            filter === "available"
               ? "bg-orange-300"
               : "bg-gray-200 hover:bg-orange-300"
           }`}

@@ -15,7 +15,7 @@ const Featured = () => {
       try {
         const response = await axios.get(`${apiUrl}/compound`);
         setProducts(response.data.slice(0, 3));
-        console.log(response.data);
+       
       } catch (error) {
         console.error("Error fetching the products:", error);
       }

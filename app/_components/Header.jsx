@@ -88,14 +88,14 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     href="https://wa.me/201555909247"
                     className="text-white transition hover:text-gray-500/75 text-xl"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     تواصل معنا
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -136,7 +136,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="https://wa.me/201555909247"
                   className="text-white transition hover:text-gray-500/75"
                   target="_blank"
@@ -144,7 +144,7 @@ const Header = () => {
                   onClick={closeMenu} // غلق القائمة عند النقر على الرابط
                 >
                   تواصل معنا
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>

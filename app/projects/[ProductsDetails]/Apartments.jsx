@@ -5,10 +5,10 @@ import ApartmentCard from "./ApartmentCard";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import Link from "next/link";
 
 const Apartments = () => {
   const { ProductsDetails } = useParams();
-  console.log(ProductsDetails);
 
   const [apartments, setApartments] = useState([]);
   const [error, setError] = useState("");
@@ -21,7 +21,6 @@ const Apartments = () => {
     axios
       .get(`${apiUrl}/apartment/${ProductsDetails}`)
       .then((res) => {
-        console.log(res.data);
         setApartments(res.data);
       })
       .catch((err) => {
@@ -44,7 +43,9 @@ const Apartments = () => {
             <PiBuildingApartmentDuotone className="text-5xl dark:text-white" />
             <h1 className="font-light font-sans text-3xl flex items-center  dark:text-white">
               الوحدات :{" "}
-              <span className="text-3xl font-medium  dark:text-white">{apartments.length}</span>
+              <span className="text-3xl font-medium  dark:text-white">
+                {apartments.length}
+              </span>
             </h1>
           </div>
         </div>
@@ -55,7 +56,7 @@ const Apartments = () => {
           استمتع بأسلوب حياة مترفة وفريدة من نوعها في مشروعنا السكني الفاخر،
           وحدات تمليك تجمع بين الرقي والراحة.
         </h2>
-        <a
+        <Link
           href="https://wa.me/201555909247"
           className="text-black transition hover:text-gray-500/75 text-xl"
           target="_blank"
@@ -64,9 +65,11 @@ const Apartments = () => {
           <button className="btn bg-transparent font-sans border-[2px] flex justify-center items-center text-xl border-[#c39a62] hover:bg-[#c39a62] p-4 rounded-full h-[40px] w-[300px] dark:text-white">
             تحدث مع مندوب المبيعات
           </button>
-        </a>
+        </Link>
 
-        <h1 className="text-4xl font-sans font-extrabold mb-5  dark:text-white">الـوحـدات</h1>
+        <h1 className="text-4xl font-sans font-extrabold mb-5  dark:text-white">
+          الـوحـدات
+        </h1>
       </div>
       <div className="cards grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:max-w-screen-lg mx-auto">
         {loading ? (

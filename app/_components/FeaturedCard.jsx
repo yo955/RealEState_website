@@ -1,5 +1,6 @@
 import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
+import Link from "next/link";
 
 const Card = ({ status, imageUrl, location, projectTitle }) => {
   const statusColors = {
@@ -29,15 +30,11 @@ const Card = ({ status, imageUrl, location, projectTitle }) => {
   }
   return (
     <div className="card hover:shadow-lg transition-all duration-150">
-      <a
-        href="#"
-        className="relative block rounded-3xl border border-gray-100 overflow-hidden shadow-lg  dark:border-gray-600"
-      >
+      <div className="relative block rounded-3xl border border-gray-100 overflow-hidden shadow-lg  dark:border-gray-600">
         <span
           className={`absolute w-1/4 text-center  justify-center inline-table items-center  top-6 left-1 z-10 rounded-r-lg px-4 py-1 text-xl font-medium uppercase tracking-wide text-white ${statusColors[status]}`}
         >
           {translate(status.toLowerCase())}
-
         </span>
 
         <div className="relative w-full h-56 ">
@@ -62,7 +59,7 @@ const Card = ({ status, imageUrl, location, projectTitle }) => {
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 };

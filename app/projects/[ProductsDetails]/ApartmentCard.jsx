@@ -30,7 +30,11 @@ const ApartmentCard = ({ apartment }) => {
     }
   }
 
-  const togglePopup = () => setIsOpen(!isOpen);
+  const togglePopup = () => {
+    if (apartment.status != "soon") {
+      setIsOpen(!isOpen);
+    }
+  };
 
   return (
     <div>
@@ -38,7 +42,7 @@ const ApartmentCard = ({ apartment }) => {
         onClick={togglePopup}
         className="card hover:shadow-lg transition-all duration-150 w-full cursor-pointer"
       >
-        <a className="relative block rounded-3xl border border-gray-100 overflow-hidden shadow-lg dark:border-gray-600">
+        <div className="relative block rounded-3xl border border-gray-100 overflow-hidden shadow-lg dark:border-gray-600">
           <span
             className={`absolute w-1/4 text-center justify-center inline-table items-center top-6 left-1 z-10 rounded-r-lg px-4 py-1 text-xl font-medium uppercase tracking-wide text-white ${
               statusColors[apartment.status]
@@ -91,7 +95,7 @@ const ApartmentCard = ({ apartment }) => {
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
 
       {/* Popup */}

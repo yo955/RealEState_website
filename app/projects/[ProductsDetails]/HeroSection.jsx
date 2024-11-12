@@ -3,7 +3,7 @@ import { useSearchParams } from "next/navigation";
 const HeroSection = () => {
   const searchParams = useSearchParams();
   const image = searchParams.get("image");
-  console.log(image);
+ 
 
   return (
     <section

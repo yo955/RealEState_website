@@ -2,6 +2,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import AosWrapper from "../lib/ScrollAnimation";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -21,19 +22,19 @@ const Footer = () => {
               <h3 className="text-xl font-bold mb-4">روابط سريعة</h3>
               <ul>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <Link href="#" className="hover:underline">
                     الرئيسية
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <Link href="#" className="hover:underline">
                     مشاريعنا
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <Link href="#" className="hover:underline">
                     من نحن
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
