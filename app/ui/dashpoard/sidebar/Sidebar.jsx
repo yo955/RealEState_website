@@ -17,6 +17,7 @@ import {
 } from "react-icons/md";
 
 import axios from "axios";
+import { PiCodaLogo } from "react-icons/pi";
 const menuItems = [
   {
     title: "pages",
@@ -81,7 +82,8 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
-  const logoutUser = async (req, res) => {
+  const logoutUser = async () => {
+    
     try {
       const response = await axios.post(
         "https://real-state-liard.vercel.app/user/logout",
@@ -90,7 +92,7 @@ const Sidebar = () => {
           withCredentials: true,
         }
       );
-      console.log(response.data); 
+      
     } catch (error) {
       console.error("Logout error:", error.message);
     }

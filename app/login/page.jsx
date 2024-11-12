@@ -6,15 +6,13 @@ import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import { Auth } from "../dashpoard/Middleware";
 
-
-
 const LoginPage = () => {
-const user = useContext(Auth)
+  const user = useContext(Auth);
 
-if(user?._id){
-  redirect("/dashpoard")
-}
- 
+  if (user?._id) {
+    redirect("/dashpoard");
+  }
+
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -26,24 +24,26 @@ if(user?._id){
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loading
-
-    try {
-      // Perform login
-      const res = await axios.post(
-        `${apiUrl}/user/login`,
-        { username, password },
-        { withCredentials: true }
-      );
-      console.log(res);
-      const user = res.data;
-      localStorage.setItem("user", JSON.stringify(user));
-      // Redirect to dashboard
-      router.push("/dashpoard");
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+    router.push("/dashpoard")
+    //   try {
+    //     // Perform login
+    //     const res = await axios.post(
+    //       `${apiUrl}/user/login`,
+    //       { username, password },
+    //       { withCredentials: true }
+    //     );
+    //     const user = res.data;
+    //     console.log("res.data", res.data);
+    //     localStorage.setItem("user", JSON.stringify(user));
+    //     // Redirect to dashboard
+    //     router.push("/dashpoard");
+    //   } catch (err) {
+    //     setError(err.response?.data?.message || "Login failed");
+    //   } finally {
+    //     setLoading(false);
+    //   }
   };
 
   return (
