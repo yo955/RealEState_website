@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -9,12 +9,13 @@ import Link from "next/link";
 const Featured = () => {
   const [products, setProducts] = useState([]);
 
-  // جلب البيانات من ملف JSON محلي باستخدام Axios
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("/data/products.json"); // مسار ملف JSON في مجلد public
-        setProducts(response.data.slice(0, 3)); // اجلب 3 كروت فقط
+        const response = await axios.get(`${apiUrl}/compound`);
+        setProducts(response.data.slice(0, 3));
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching the products:", error);
       }
@@ -22,17 +23,23 @@ const Featured = () => {
     fetchProducts();
   }, []);
 
-  const CardJsx = products.map((item) => {
+  const CardJsx = products.map((item, index) => {
+    const status = item.status;
+    let link = "";
+    if (status == "available" || status == "sold") {
+      link = `/projects/${item._id}?image=${item.mainImage}`;
+    }
     return (
-      <AosWrapper key={item.id}>
-        <div data-aos="zoom-in">
-          <Card
-            status={item.status}
-            imageUrl={item.imageUrl}
-            location={item.location}
-            projectName={item.projectName}
-            projectNumber={item.projectNumber}
-          />
+      <AosWrapper key={index}>
+        <div data-aos="zoom-in" key={item._id}>
+          <Link href={link}>
+            <Card
+              status={item.status}
+              imageUrl={item.mainImage}
+              location={item.location}
+              projectTitle={item.title}
+            />
+          </Link>
         </div>
       </AosWrapper>
     );

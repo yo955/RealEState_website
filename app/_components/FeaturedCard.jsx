@@ -1,7 +1,7 @@
 import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
 
-const Card = ({ status, imageUrl, location, projectName }) => {
+const Card = ({ status, imageUrl, location, projectTitle }) => {
   const statusColors = {
     متاح: "bg-green-600 ",
     قريبا: "bg-yellow-500",
@@ -54,7 +54,7 @@ const Card = ({ status, imageUrl, location, projectName }) => {
         <div className="p-1 bg-white dark:bg-black">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-2xl font-bold text-gray-800  dark:text-white">
-              {projectName}
+              {projectTitle}
             </h3>
             <div className="flex items-center text-gray-600  dark:text-white">
               <IoLocationSharp className="mr-1" />

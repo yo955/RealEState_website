@@ -78,17 +78,23 @@ const FeatureProjects = () => {
       <AosWrapper>
         <div data-aos="fade-down">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => (
-              <Link href={`/projects/${product._id}?image=${product.mainImage}`} key={product._id}>
-                <ProjectsCard
-                  key={product._id}
-                  status={product.status}
-                  imageUrl={product.mainImage}
-                  location={product.location}
-                  projectName={product.title}
-                />
-              </Link>
-            ))}
+            {filteredProducts.map((product) => {
+              let link = "";
+              if (product.status === "available" || product.status === "sold") {
+                link = `/projects/${product._id}?image=${product.mainImage}`;
+              }
+
+              return (
+                <Link href={link} key={product._id}>
+                  <ProjectsCard
+                    status={product.status}
+                    imageUrl={product.mainImage}
+                    location={product.location}
+                    projectName={product.title}
+                  />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </AosWrapper>
