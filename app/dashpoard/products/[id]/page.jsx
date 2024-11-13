@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -43,7 +45,9 @@ const SingleProductPage = () => {
     e.preventDefault();
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-      alert("Please log in to update the product.");
+      toast.warn("Please log in to update the product.", {
+        position: "bottom-right",
+      });
       return;
     }
     try {
@@ -53,10 +57,14 @@ const SingleProductPage = () => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      alert("Apartment updated successfully!");
+      toast.success("Apartment updated successfully!", {
+        position: "bottom-right",
+      });
     } catch (error) {
       console.error("Error updating apartment:", error);
-      alert("Failed to update apartment.");
+      toast.error("Failed to update apartment.", {
+        position: "bottom-right",
+      });
     }
   };
 
@@ -64,6 +72,7 @@ const SingleProductPage = () => {
 
   return (
     <div className={styles.container}>
+      <ToastContainer /> 
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
