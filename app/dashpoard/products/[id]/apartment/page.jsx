@@ -10,60 +10,64 @@ import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 import { toast } from "react-toastify"; 
 
 const ApartmentPage = () => {
-  const { id } = useParams();
-  const [apartments, setApartments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showPopup, setShowPopup] = useState(false);
-  const [apartmentToDelete, setApartmentToDelete] = useState(null);
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const { id } = useParams(); // الحصول على معرف الـ product من الـ URL
+  const [apartments, setApartments] = useState([]); // لتخزين بيانات الشقق
+  const [isLoading, setIsLoading] = useState(true); // لعرض حالة التحميل
+  const [showPopup, setShowPopup] = useState(false); // لإظهار أو إخفاء نافذة الحذف
+  const [apartmentToDelete, setApartmentToDelete] = useState(null); // لتخزين الشقة التي سيتم حذفها
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL; // رابط الـ API
 
+  // جلب بيانات الشقق عند تحميل الصفحة
   useEffect(() => {
     axios
       .get(`${apiUrl}/apartment/${id}`)
       .then((res) => {
-        setApartments(res.data);
-        setIsLoading(false);
+        setApartments(res.data); // تخزين البيانات المستلمة
+        setIsLoading(false); // إيقاف حالة التحميل
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        setIsLoading(false);
+        setIsLoading(false); // إيقاف حالة التحميل في حالة حدوث خطأ
       });
   }, [id, apiUrl]);
 
+  // دالة حذف الشقة
   const handleDelete = async () => {
     try {
       await axios.delete(`${apiUrl}/apartment/delete/${apartmentToDelete}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`, // إضافة التوكن
         },
       });
-      setApartments(apartments.filter((apt) => apt._id !== apartmentToDelete));
-      setShowPopup(false);
-      toast.success("Apartment deleted successfully!");
+      setApartments(apartments.filter((apt) => apt._id !== apartmentToDelete)); // تحديث القائمة بعد الحذف
+      setShowPopup(false); // إخفاء نافذة التأكيد
+      toast.success("Apartment deleted successfully!"); // عرض رسالة نجاح
     } catch (error) {
       console.error("Error deleting apartment:", error);
-      toast.error("Failed to delete apartment.");
+      toast.error("Failed to delete apartment."); // عرض رسالة خطأ
     }
   };
 
+  // فتح نافذة الحذف
   const openDeletePopup = (apartmentId) => {
-    setApartmentToDelete(apartmentId);
-    setShowPopup(true);
+    setApartmentToDelete(apartmentId); // تخزين المعرف
+    setShowPopup(true); // إظهار نافذة التأكيد
   };
 
+  // إغلاق نافذة الحذف
   const closeDeletePopup = () => {
-    setShowPopup(false);
-    setApartmentToDelete(null);
+    setShowPopup(false); // إخفاء نافذة التأكيد
+    setApartmentToDelete(null); // مسح المعرف
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>; // عرض التحميل أثناء جلب البيانات
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Search placeholder="Search for a product..." />
+        <Search placeholder="Search for a product..." /> {/* مكون البحث */}
         <Link href="/dashpoard/products/add">
-          <button className={styles.addButton}>Add New</button>
+          <button className={styles.addButton}>Add New</button> {/* زر إضافة جديدة */}
         </Link>
       </div>
       <table className={styles.table}>
@@ -127,7 +131,7 @@ const ApartmentPage = () => {
           )}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination /> {/* مكون التصفح */}
 
       {/* Popup Confirmation */}
       {showPopup && (

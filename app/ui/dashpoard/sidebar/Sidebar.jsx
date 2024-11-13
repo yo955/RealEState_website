@@ -2,7 +2,6 @@
 import styles from "./sidebar.module.css";
 import MenuLink from "./menuLink/MenuLink";
 import Image from "next/image";
-import Link from "next/link";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
@@ -15,6 +14,7 @@ import {
   MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
+
 
 import { useRouter } from "next/navigation";
 const menuItems = [
@@ -43,26 +43,7 @@ const menuItems = [
       },
     ],
   },
-  {
-    title: "Analytics",
-    list: [
-      {
-        title: "Revenue",
-        path: "",
-        icon: <MdWork />,
-      },
-      {
-        title: "Reports",
-        path: "",
-        icon: <MdAnalytics />,
-      },
-      {
-        title: "Teams",
-        path: "",
-        icon: <MdPeople />,
-      },
-    ],
-  },
+ 
   {
     title: "User",
     list: [

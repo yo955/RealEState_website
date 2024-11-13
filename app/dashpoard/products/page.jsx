@@ -6,14 +6,16 @@ import Image from "next/image";
 import Search from "@/app/ui/dashpoard/search/Search";
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify"; // استيراد الـ Toastify
 
 const ProductsPage = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [compound, setCompound] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [compoundToDelete, setCompoundToDelete] = useState(null); // لتخزين معرف المنتج الذي سيتم حذفه
+  const [showPopup, setShowPopup] = useState(false); // لعرض الـ popup
 
-  
   const trimText = useCallback((text) => {
     return text.length > 10 ? text.slice(0, 10) + "..." : text;
   }, []);
@@ -31,6 +33,32 @@ const ProductsPage = () => {
         setIsLoading(false);
       });
   }, [apiUrl]);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${apiUrl}/compound/delete/${compoundToDelete}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      });
+      setCompound(compound.filter((product) => product._id !== compoundToDelete)); // حذف المنتج من الواجهة
+      setShowPopup(false); // إغلاق الـ popup بعد الحذف
+      toast.success("Product deleted successfully!", { position: "bottom-right" }); // عرض Toast عند الحذف بنجاح
+    } catch (error) {
+      console.error("Error deleting compound:", error);
+      toast.error("Error deleting product. Please try again.", { position: "bottom-right" }); // عرض Toast عند حدوث خطأ
+    }
+  };
+
+  const openDeletePopup = (compoundId) => {
+    setCompoundToDelete(compoundId);
+    setShowPopup(true);
+  };
+
+  const closeDeletePopup = () => {
+    setShowPopup(false);
+    setCompoundToDelete(null);
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div className={styles.error}>{error}</div>;
@@ -68,7 +96,7 @@ const ProductsPage = () => {
                 <td>
                   <div className={styles.product}>
                     <Image
-                      src={product.mainImage || "/noproduct.jpg"} 
+                      src={product.mainImage || "/noproduct.jpg"}
                       alt={product.title}
                       width={100}
                       height={100}
@@ -88,7 +116,10 @@ const ProductsPage = () => {
                         View
                       </button>
                     </Link>
-                    <button className={`${styles.button} ${styles.delete}`}>
+                    <button
+                      onClick={() => openDeletePopup(product._id)} // إرسال معرف المنتج للحذف
+                      className={`${styles.button} ${styles.delete}`}
+                    >
                       Delete
                     </button>
                   </div>
@@ -99,6 +130,32 @@ const ProductsPage = () => {
         </tbody>
       </table>
       <Pagination />
+
+      {/* Popup تأكيد الحذف */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-slate-400 p-6 rounded shadow-lg">
+            <h3 className="text-lg font-semibold">Are you sure you want to delete this product?</h3>
+            <div className="flex justify-end space-x-4 mt-4">
+              <button
+                onClick={closeDeletePopup}
+                className="bg-gray-300 py-2 px-4 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                className="bg-red-500 text-white py-2 px-4 rounded"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ToastContainer لعرض التوست */}
+      <ToastContainer />
     </div>
   );
 };
