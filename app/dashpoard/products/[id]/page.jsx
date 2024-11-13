@@ -43,6 +43,9 @@ const SingleProductPage = () => {
     try {
       await axios.patch(`${apiUrl}/compound/update/${product._id}`, product, {
         withCredentials: true,
+        headers:{
+          "Authorization":`Bearer ${localStorage.getItem("jwt")}`
+        }
       });
       alert("Apartment updated successfully!");
     } catch (error) {
@@ -56,12 +59,13 @@ const SingleProductPage = () => {
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src={product.mainImage ? product.mainImage : "/noavatar.jpg"}
+            src={product.mainImage ? product.mainImage : "/noavatar.png"}
             alt="productImage"
-            fill
+             fill
+             blurDataURL=""
             className={styles.userImg}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            placeholder="blur"
+           
           />
         </div>
         {product.title}

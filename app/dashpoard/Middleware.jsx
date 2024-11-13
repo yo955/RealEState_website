@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import { PiCodaLogo } from "react-icons/pi";
@@ -13,23 +14,26 @@ const Middleware = ({ children }) => {
   const userStorage = localStorage.getItem("username");
   const passStorage = localStorage.getItem("password");
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  
+  const router = useRouter()
   const getUser = async () => {
     try {
       await axios
-        .post(
-          `${apiUrl}/user/login`,
-          { username: userStorage, password: passStorage },
+        .get(`${apiUrl}/user/me`,
           {
             withCredentials: true,
+            headers:{
+              "Authorization":`Bearer ${localStorage.getItem("jwt")}`
+            }
           }
         )
         .then(async (res) => {
-          if (await res?.data) {
-            setUser(await res.data);
-          }
+          setUser(await res?.data);
+            // router.push("/dashpoard")
+          
         });
     } catch (error) {
+      setUser(null)
+      router.push("/login")
     } finally {
       setIsloading(false);
     }
@@ -39,13 +43,11 @@ const Middleware = ({ children }) => {
     getUser();
   }, []);
 
-  if (isLoading) {
-    return <div>...loading</div>;
+  if(isLoading){
+    return <div>...loading</div>
   }
-  if (!user?._id) {
-    redirect("/login");
-  }
-  return <Auth.Provider value={user}>{children}</Auth.Provider>;
+
+  return <Auth.Provider value={{user,isLoading}}>{children}</Auth.Provider>;
 };
 
 export default Middleware;

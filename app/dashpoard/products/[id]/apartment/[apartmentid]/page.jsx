@@ -41,7 +41,11 @@ const SingleApartmentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment,{withCredentials : true});
+      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment,{withCredentials : true,
+        headers:{
+          "Authorization":`Bearer ${localStorage.getItem("jwt")}`
+        }
+      });
       alert("Apartment updated successfully!");
     } catch (error) {
       console.error("Error updating apartment:", error);
@@ -55,13 +59,13 @@ const SingleApartmentPage = () => {
         <div className={styles.imgContainer}>
           <Image
             src={
-              apartment.mainImage ? `${apartment.mainImage}` : "/noavatar.jpg"
+              apartment.mainImage ? `${apartment.mainImage}` : "/noproduct.jpg"
             }
-            alt="productImage"
+            alt="adad"
             fill
             className={styles.userImg}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            
+         
           />
         </div>
         {apartment.status || "Loading..."}

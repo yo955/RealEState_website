@@ -1,6 +1,6 @@
 import styles from "./transactions.module.css";
 import Image from "next/image";
-// import avatar  from ""
+
 const Transactions = () => {
   return (
     <div className={styles.container}>
@@ -42,7 +42,7 @@ const Transactions = () => {
             <td>
               <div className={styles.user}>
                 <Image
-                  src="/noavatar.png"
+                 src="/noavatar.png"
                   alt="avatarImage"
                   width={40}
                   height={40}

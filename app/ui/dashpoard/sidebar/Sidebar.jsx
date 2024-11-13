@@ -18,6 +18,8 @@ import {
 
 import axios from "axios";
 import { PiCodaLogo } from "react-icons/pi";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 const menuItems = [
   {
     title: "pages",
@@ -82,24 +84,12 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+
+  const router = useRouter()
   const logoutUser = async () => {
     
-    try {
-      const response = await axios.post(
-        "https://real-state-liard.vercel.app/user/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-        
-      );
-      localStorage.removeItem("password")
-      localStorage.removeItem("username");
-
-      
-    } catch (error) {
-      console.error("Logout error:", error.message);
-    }
+   localStorage.setItem("jwt","")
+  router.push("/login")
   };
   
  
@@ -131,12 +121,11 @@ const Sidebar = () => {
           );
         })}
       </ul>
-     <Link href="/login">
         <div className={styles.logout} onClick={logoutUser}>
           <MdLogout />
           Logout
         </div>
-        </Link>
+   
     </div>
   );
 };

@@ -2,6 +2,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import FooterWrapper from "./_components/FotterWrabber";
 import HeaderWrapper from "./_components/HeaderWrabber";
+import Context from "./dashpoard/Context";
+import Middleware from "./dashpoard/Middleware";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +31,13 @@ export default function RootLayout({ children }) {
       >
         <>
           <HeaderWrapper />
+          <Middleware>
+
+          <Context>
+
           <main className="w-full min-h-screen">{children}</main>
+          </Context>
+          </Middleware>
           <FooterWrapper />
         </>
       </body>

@@ -3,25 +3,53 @@ import styles from "@/app/ui/login/login.module.css";
 import "@/app/ui/dashpoard-globals.css";
 import { useContext, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
+import axios from "axios";
+import { Auth } from "../dashpoard/Middleware";
 
 const LoginPage = () => {
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [error] = useState(null);
+  const [error,setError] = useState(null);
   const [loading, setLoading] = useState(false); // For loading state
 
   const router = useRouter();
-
+const {user} = useContext(Auth)
+// if(user?._id){
+//   redirect("/dashpoard")
+// }
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading
-    localStorage.setItem("username", username);
-    localStorage.setItem("password", password);
-    router.push("/dashpoard")
-    
+
+    try {
+      setLoading(true)
+       await axios.post("https://real-state-liard.vercel.app/user/login",{
+        username,password
+      },{
+        withCredentials:true
+      }).then(async (res)=>{
+        if(await res.data.token){
+          localStorage.setItem("jwt",await res.data.token)
+        }
+      router.push("/dashpoard")
+     
+      }).catch(error=>{
+        console.log(error)
+        
+        setError(error?.response?.data.error)
+        
+      })
+      
+    } catch (error) {
+      console.log(error.message)
+    }finally{
+      setLoading(false)
+    }
   };
 
+  if(loading){
+    return <div>...loading</div>
+  }
   return (
     <div className={styles.container}>
       <form onSubmit={handleLogin} className={styles.form}>
