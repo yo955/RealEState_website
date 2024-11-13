@@ -1,5 +1,5 @@
 "use client";
-import ProjectsCard from "../_components/FeaturedCard";
+import ProjectsCard from "../_components/Featured/FeaturedCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AosWrapper from "../lib/ScrollAnimation";

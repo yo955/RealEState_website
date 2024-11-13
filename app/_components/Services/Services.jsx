@@ -1,5 +1,5 @@
 import ServiceCard from "./ServiceCard";
-import AosWrapper from "../lib/ScrollAnimation";
+import AosWrapper from "@/app/lib/ScrollAnimation";
 const Services = () => {
   const services = [
     {

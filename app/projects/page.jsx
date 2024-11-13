@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import Category from "../_components/Category";
+import Category from "../_components/Category/Category";
 import FeatureProjects from "./FeatureProjects";
 // استخدم dynamic لتجنب مشاكل SSR مع Leaflet
 const MapComponent = dynamic(() => import("../lib/MapComponent"), {

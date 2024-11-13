@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AosWrapper from "../lib/ScrollAnimation";
+import AosWrapper from "@/app/lib/ScrollAnimation";
 const Category = () => {
   return (
     <AosWrapper>

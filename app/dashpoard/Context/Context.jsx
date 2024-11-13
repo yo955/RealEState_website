@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect } from "react";
-import { Auth } from "./Middleware";
+import { Auth } from "../middleware/Middleware";
 import { useRouter } from "next/navigation";
 
 const Context = ({ children }) => {

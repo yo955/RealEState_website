@@ -4,7 +4,7 @@ import "@/app/ui/dashpoard-globals.css";
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { Auth } from "../dashpoard/Middleware";
+import { Auth } from "../dashpoard/middleware/Middleware";
 
 const LoginPage = () => {
   const [username, setUserName] = useState("");

@@ -1,4 +1,4 @@
-import TypingAnimation from "../lib/TypingAnimation";
+import TypingAnimation from "@/app/lib/TypingAnimation";
 
 const HeroSection = () => {
   const shouldAnimate = true; // سيتم تشغيل الأنيميشن هنا
