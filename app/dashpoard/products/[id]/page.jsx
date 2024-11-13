@@ -15,8 +15,7 @@ const SingleProductPage = () => {
     mainImage: "",
     description: "",
   });
- 
-
+  const [isLoading, setIsLoading] = useState(true);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
@@ -24,11 +23,13 @@ const SingleProductPage = () => {
       .get(`${apiUrl}/compound/find/${id}`)
       .then((res) => {
         setProduct(res.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setIsLoading(false);
       });
-  }, [id]);
+  }, [id, apiUrl]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,12 +41,17 @@ const SingleProductPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+      alert("Please log in to update the product.");
+      return;
+    }
     try {
       await axios.patch(`${apiUrl}/compound/update/${product._id}`, product, {
         withCredentials: true,
-        headers:{
-          "Authorization":`Bearer ${localStorage.getItem("jwt")}`
-        }
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
       });
       alert("Apartment updated successfully!");
     } catch (error) {
@@ -54,6 +60,8 @@ const SingleProductPage = () => {
     }
   };
 
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -61,11 +69,9 @@ const SingleProductPage = () => {
           <Image
             src={product.mainImage ? product.mainImage : "/noavatar.png"}
             alt="productImage"
-             fill
-             blurDataURL=""
+            fill
             className={styles.userImg}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-           
           />
         </div>
         {product.title}
@@ -107,7 +113,7 @@ const SingleProductPage = () => {
             onChange={handleChange}
             placeholder="Description"
             rows={5}
-            style={{direction : "rtl"}}
+            style={{ direction: "rtl" }}
           ></textarea>
           <button type="submit">Update</button>
         </form>

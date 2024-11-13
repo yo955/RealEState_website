@@ -9,7 +9,8 @@ const AosWrapper = ({ children }) => {
       duration: 1500,  // مدة الأنيميشن
       delay: 200,      // تأخير بدء الأنيميشن
       disable: function() {
-        return window.innerWidth < 768; // تعطيل AOS على الشاشات التي تكون أقل من 768px
+        return window.innerWidth < 768; 
+        // تعطيل AOS على الشاشات التي تكون أقل من 768px
       },
     });
   }, []);

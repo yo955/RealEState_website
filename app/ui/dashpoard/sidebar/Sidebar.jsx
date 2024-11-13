@@ -16,9 +16,6 @@ import {
   MdLogout,
 } from "react-icons/md";
 
-import axios from "axios";
-import { PiCodaLogo } from "react-icons/pi";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 const menuItems = [
   {
@@ -86,10 +83,10 @@ const menuItems = [
 const Sidebar = () => {
 
   const router = useRouter()
+ 
   const logoutUser = async () => {
-    
-   localStorage.setItem("jwt","")
-  router.push("/login")
+    localStorage.removeItem("jwt");  
+    router.push("/login");
   };
   
  

@@ -4,6 +4,8 @@ import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css";
 
 const SingleApartmentPage = () => {
   const { apartmentid } = useParams();
@@ -16,6 +18,8 @@ const SingleApartmentPage = () => {
     status: "",
     description: "",
   });
+  
+  const [isLoading, setIsLoading] = useState(true);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -24,9 +28,12 @@ const SingleApartmentPage = () => {
       .get(`${apiUrl}/apartment/find/${apartmentid}`, { withCredentials: true })
       .then((res) => {
         setApartment(res.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setIsLoading(false);
+        toast.error("Failed to load apartment data."); // عرض Toast عند الفشل
       });
   }, [apartmentid]);
 
@@ -41,35 +48,37 @@ const SingleApartmentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment,{withCredentials : true,
-        headers:{
-          "Authorization":`Bearer ${localStorage.getItem("jwt")}`
-        }
+      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment, {
+        withCredentials: true,
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+        },
       });
-      alert("Apartment updated successfully!");
+      toast.success("Apartment updated successfully!"); 
     } catch (error) {
       console.error("Error updating apartment:", error);
-      alert("Failed to update apartment.");
+      toast.error("Failed to update apartment."); 
     }
   };
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src={
-              apartment.mainImage ? `${apartment.mainImage}` : "/noproduct.jpg"
-            }
-            alt="adad"
+            src={apartment.mainImage || "/noproduct.jpg"}
+            alt="Apartment Image"
             fill
+            priority
             className={styles.userImg}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-         
           />
         </div>
-        {apartment.status || "Loading..."}
+        <p>{apartment.status || "Loading..."}</p>
       </div>
+
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <label>Rooms</label>
@@ -107,7 +116,7 @@ const SingleApartmentPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
-          
+
           <button type="submit">Update</button>
         </form>
       </div>

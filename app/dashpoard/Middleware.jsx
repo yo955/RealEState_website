@@ -1,18 +1,14 @@
 "use client";
 import axios from "axios";
-import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
-import { PiCodaLogo } from "react-icons/pi";
 
 export const Auth = createContext(null);
 const Middleware = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [isLoading, setIsloading] = useState(true);
-  const userStorage = localStorage.getItem("username");
-  const passStorage = localStorage.getItem("password");
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter()
   const getUser = async () => {

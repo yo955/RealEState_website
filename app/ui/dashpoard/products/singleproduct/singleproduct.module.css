@@ -64,3 +64,12 @@
   cursor: pointer;
   margin-top: 20px;
 }
+.successMessage {
+  color: green;
+  font-weight: bold;
+}
+
+.errorMessage {
+  color: red;
+  font-weight: bold;
+}

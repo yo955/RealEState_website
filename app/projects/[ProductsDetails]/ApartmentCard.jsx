@@ -123,6 +123,7 @@ const ApartmentCard = ({ apartment }) => {
                 <Image
                   src={apartment.mainImage}
                   alt="مشروع عقاري"
+                  priority
                   width={2000} // Setting a wide width for landscape
                   height={1000} // A smaller height for landscape view
                   className="rounded-lg object-cover w-full"

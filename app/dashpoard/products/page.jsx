@@ -4,27 +4,36 @@ import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "@/app/ui/dashpoard/search/Search";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
 const ProductsPage = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [compound, setCompound] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  
+  const trimText = useCallback((text) => {
+    return text.length > 10 ? text.slice(0, 10) + "..." : text;
+  }, []);
 
   useEffect(() => {
     axios
       .get(`${apiUrl}/compound`)
       .then((response) => {
         setCompound(response.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setError("Failed to load data. Please try again later.");
+        setIsLoading(false);
       });
-  }, []);
+  }, [apiUrl]);
 
-  const trimText = (text) => {
-    return text.slice(0, 10);
-  };
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div className={styles.error}>{error}</div>;
 
   return (
     <div className={styles.container}>
@@ -59,11 +68,7 @@ const ProductsPage = () => {
                 <td>
                   <div className={styles.product}>
                     <Image
-                      src={
-                        product.mainImage
-                          ? `${product.mainImage}`
-                          : "/noproduct.jpg"
-                      }
+                      src={product.mainImage || "/noproduct.jpg"} 
                       alt={product.title}
                       width={100}
                       height={100}

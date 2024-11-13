@@ -27,6 +27,7 @@ const Header = () => {
                 <Image
                   className="z-10 object-contain"
                   src="/logo.svg"
+                  priority
                   alt="شعار الموقع"
                   fill // استخدم fill بدلاً من width و height
                   sizes="(max-width: 640px) 100vw, 50vw" // أضف sizes لتحديد الحجم النسبي

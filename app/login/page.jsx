@@ -2,54 +2,52 @@
 import styles from "@/app/ui/login/login.module.css";
 import "@/app/ui/dashpoard-globals.css";
 import { useContext, useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Auth } from "../dashpoard/Middleware";
 
 const LoginPage = () => {
-
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [error,setError] = useState(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false); // For loading state
-
   const router = useRouter();
-const {user} = useContext(Auth)
-// if(user?._id){
-//   redirect("/dashpoard")
-// }
+
+  const { user } = useContext(Auth);
+
+  // Redirect user to dashboard if already logged in
+  if (user?._id) {
+    router.push("/dashpoard");
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      setLoading(true)
-       await axios.post("https://real-state-liard.vercel.app/user/login",{
-        username,password
-      },{
-        withCredentials:true
-      }).then(async (res)=>{
-        if(await res.data.token){
-          localStorage.setItem("jwt",await res.data.token)
-        }
-      router.push("/dashpoard")
-     
-      }).catch(error=>{
-        
-        
-        setError(error?.response?.data.error)
-        
-      })
-      
+      setLoading(true);
+      await axios
+        .post("https://real-state-liard.vercel.app/user/login", {
+          username,
+          password,
+        }, {
+          withCredentials: true,
+        })
+        .then(async (res) => {
+          if (res.data.token) {
+            localStorage.setItem("jwt", res.data.token);
+          }
+          router.push("/dashpoard");
+        })
+        .catch((error) => {
+          setError(error?.response?.data?.error || "Something went wrong!");
+        });
     } catch (error) {
-      
-    }finally{
-      setLoading(false)
+      setError("Something went wrong!");
+    } finally {
+      setLoading(false);
     }
   };
 
-  if(loading){
-    return <div>...loading</div>
-  }
   return (
     <div className={styles.container}>
       <form onSubmit={handleLogin} className={styles.form}>
@@ -68,7 +66,11 @@ const {user} = useContext(Auth)
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+          {loading ? (
+            <div className={styles.spinner}></div> // Display spinner while loading
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
     </div>

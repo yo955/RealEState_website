@@ -7,12 +7,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Search from "@/app/ui/dashpoard/search/Search";
 import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
+import { toast } from "react-toastify"; 
 
 const ApartmentPage = () => {
   const { id } = useParams();
-
   const [apartments, setApartments] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const [apartmentToDelete, setApartmentToDelete] = useState(null);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
@@ -20,11 +22,41 @@ const ApartmentPage = () => {
       .get(`${apiUrl}/apartment/${id}`)
       .then((res) => {
         setApartments(res.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        setIsLoading(false);
       });
-  }, [id]);
+  }, [id, apiUrl]);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${apiUrl}/apartment/delete/${apartmentToDelete}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      });
+      setApartments(apartments.filter((apt) => apt._id !== apartmentToDelete));
+      setShowPopup(false);
+      toast.success("Apartment deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting apartment:", error);
+      toast.error("Failed to delete apartment.");
+    }
+  };
+
+  const openDeletePopup = (apartmentId) => {
+    setApartmentToDelete(apartmentId);
+    setShowPopup(true);
+  };
+
+  const closeDeletePopup = () => {
+    setShowPopup(false);
+    setApartmentToDelete(null);
+  };
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className={styles.container}>
@@ -59,10 +91,11 @@ const ApartmentPage = () => {
                 <td>
                   <div className={styles.product}>
                     <Image
-                      src={`${apartment.mainImage}` || "/noproduct.jpg"}
+                      src={apartment.mainImage || "/noproduct.jpg"}
                       alt="ApartmentImg"
                       width={100}
                       height={100}
+                      priority
                       className={styles.productImage}
                     />
                   </div>
@@ -81,7 +114,10 @@ const ApartmentPage = () => {
                         View
                       </button>
                     </Link>
-                    <button className={`${styles.button} ${styles.delete}`}>
+                    <button
+                      onClick={() => openDeletePopup(apartment._id)}
+                      className={`${styles.button} ${styles.delete}`}
+                    >
                       Delete
                     </button>
                   </div>
@@ -92,6 +128,21 @@ const ApartmentPage = () => {
         </tbody>
       </table>
       <Pagination />
+
+      {/* Popup Confirmation */}
+      {showPopup && (
+        <div className={styles.popupOverlay}>
+          <div className={styles.popup}>
+            <p>Are you sure you want to delete this apartment?</p>
+            <button className={styles.confirmButton} onClick={handleDelete}>
+              <span>Yes</span>
+            </button>
+            <button className={styles.cancelButton} onClick={closeDeletePopup}>
+              No
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

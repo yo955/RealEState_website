@@ -52,3 +52,41 @@
 .delete {
   background-color: crimson;
 }
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color:rgba(0, 0, 0, 0.215);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+}
+
+.confirmButton,
+.cancelButton {
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 15%;
+}
+
+.confirmButton {
+  background-color:crimson;
+  color: white;
+}
+
+.cancelButton {
+  background-color:darkgreen;
+  color: white;
+}
