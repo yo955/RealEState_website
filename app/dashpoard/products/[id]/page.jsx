@@ -15,7 +15,7 @@ const SingleProductPage = () => {
     mainImage: "",
     description: "",
   });
-  console.log(product.description);
+ 
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 

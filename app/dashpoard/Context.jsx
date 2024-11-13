@@ -14,7 +14,7 @@ const Context = ({ children }) => {
 // useEffect(() => {
 // }, [user])
   if(!user?._id){
-    console.log(user)
+    
     // router.push("/login")
    }
 

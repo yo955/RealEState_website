@@ -34,14 +34,14 @@ const {user} = useContext(Auth)
       router.push("/dashpoard")
      
       }).catch(error=>{
-        console.log(error)
+        
         
         setError(error?.response?.data.error)
         
       })
       
     } catch (error) {
-      console.log(error.message)
+      
     }finally{
       setLoading(false)
     }
