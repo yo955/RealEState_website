@@ -61,12 +61,12 @@ const ProductsPage = () => {
                     <Image
                       src={
                         product.mainImage
-                          ? `/${product.mainImage}`
+                          ? `${product.mainImage}`
                           : "/noproduct.jpg"
                       }
                       alt={product.title}
-                      width={40}
-                      height={40}
+                      width={100}
+                      height={100}
                       className={styles.productImage}
                     />
                   </div>

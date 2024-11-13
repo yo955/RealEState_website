@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+
 const SingleProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({
@@ -12,7 +13,9 @@ const SingleProductPage = () => {
     location: "",
     status: "",
     mainImage: "",
+    description: "",
   });
+  console.log(product.description);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -31,8 +34,21 @@ const SingleProductPage = () => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
       ...prevProduct,
-      [name]: value,
+      [name.toLowerCase()]: value,
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.patch(`${apiUrl}/compound/update/${product._id}`, product, {
+        withCredentials: true,
+      });
+      alert("Apartment updated successfully!");
+    } catch (error) {
+      console.error("Error updating apartment:", error);
+      alert("Failed to update apartment.");
+    }
   };
 
   return (
@@ -40,16 +56,18 @@ const SingleProductPage = () => {
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image
-            src={product.mainImage ? `/${product.mainImage}` : "/noavatar.jpg"}
+            src={product.mainImage ? product.mainImage : "/noavatar.jpg"}
             alt="productImage"
             fill
             className={styles.userImg}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
           />
         </div>
         {product.title}
       </div>
       <div className={styles.formContainer}>
-        <form action="" className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <label>Title</label>
           <input
             type="text"
@@ -77,9 +95,18 @@ const SingleProductPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
-          <button>Update</button>
+          <label>Description</label>
+          <textarea
+            name="description"
+            id="description"
+            value={product.description}
+            onChange={handleChange}
+            placeholder="Description"
+            rows={5}
+            style={{direction : "rtl"}}
+          ></textarea>
+          <button type="submit">Update</button>
         </form>
-        {/* Go TO Add Appartament */}
         <Link href={`/dashpoard/products/${id}/apartment`}>
           <button className={styles.AddApartmentBtn}>Add an apartment</button>
         </Link>

@@ -59,10 +59,10 @@ const ApartmentPage = () => {
                 <td>
                   <div className={styles.product}>
                     <Image
-                      src={`/${apartment.mainImage}` || "/noproduct.jpg"}
+                      src={`${apartment.mainImage}` || "/noproduct.jpg"}
                       alt="ApartmentImg"
-                      width={40}
-                      height={40}
+                      width={100}
+                      height={100}
                       className={styles.productImage}
                     />
                   </div>

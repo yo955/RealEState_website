@@ -29,8 +29,9 @@
   align-items: center;
 }
 .productImage {
-  border-radius: 50%;
-  object-fit: cover;
+   border-radius: 5%;
+  object-fit: cover; 
+  padding: 2px;
 }
 .buttons {
   display: flex;

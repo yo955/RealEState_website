@@ -55,11 +55,13 @@ const SingleApartmentPage = () => {
         <div className={styles.imgContainer}>
           <Image
             src={
-              apartment.mainImage ? `/${apartment.mainImage}` : "/noavatar.jpg"
+              apartment.mainImage ? `${apartment.mainImage}` : "/noavatar.jpg"
             }
             alt="productImage"
             fill
             className={styles.userImg}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            
           />
         </div>
         {apartment.status || "Loading..."}
@@ -101,15 +103,7 @@ const SingleApartmentPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
-          <label>Description</label>
-          <textarea
-            name="description"
-            id="description"
-            value={apartment.description}
-            onChange={handleChange}
-            placeholder="Description"
-            rows={5}
-          ></textarea>
+          
           <button type="submit">Update</button>
         </form>
       </div>
