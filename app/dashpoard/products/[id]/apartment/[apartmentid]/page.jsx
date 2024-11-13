@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 
 const SingleApartmentPage = () => {
   const { apartmentid } = useParams();
-  console.log("apartment: " + apartmentid);
 
   const [apartment, setApartment] = useState({
     mainImage: "",

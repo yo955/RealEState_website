@@ -91,7 +91,11 @@ const Sidebar = () => {
         {
           withCredentials: true,
         }
+        
       );
+      localStorage.removeItem("password")
+      localStorage.removeItem("username");
+
       
     } catch (error) {
       console.error("Logout error:", error.message);

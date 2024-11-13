@@ -1,25 +1,17 @@
 "use client";
 import styles from "@/app/ui/login/login.module.css";
 import "@/app/ui/dashpoard-globals.css";
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
-import { Auth } from "../dashpoard/Middleware";
 
 const LoginPage = () => {
-  const user = useContext(Auth);
-
-  if (user?._id) {
-    redirect("/dashpoard");
-  }
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   const [loading, setLoading] = useState(false); // For loading state
 
   const router = useRouter();
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,23 +19,7 @@ const LoginPage = () => {
     localStorage.setItem("username", username);
     localStorage.setItem("password", password);
     router.push("/dashpoard")
-    //   try {
-    //     // Perform login
-    //     const res = await axios.post(
-    //       `${apiUrl}/user/login`,
-    //       { username, password },
-    //       { withCredentials: true }
-    //     );
-    //     const user = res.data;
-    //     console.log("res.data", res.data);
-    //     localStorage.setItem("user", JSON.stringify(user));
-    //     // Redirect to dashboard
-    //     router.push("/dashpoard");
-    //   } catch (err) {
-    //     setError(err.response?.data?.message || "Login failed");
-    //   } finally {
-    //     setLoading(false);
-    //   }
+    
   };
 
   return (

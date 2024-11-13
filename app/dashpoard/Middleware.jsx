@@ -12,12 +12,13 @@ const Middleware = ({ children }) => {
   const [isLoading, setIsloading] = useState(true);
   const userStorage = localStorage.getItem("username");
   const passStorage = localStorage.getItem("password");
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   
   const getUser = async () => {
     try {
       await axios
         .post(
-          "https://real-state-liard.vercel.app/user/login",
+          `${apiUrl}/user/login`,
           { username: userStorage, password: passStorage },
           {
             withCredentials: true,
@@ -25,14 +26,10 @@ const Middleware = ({ children }) => {
         )
         .then(async (res) => {
           if (await res?.data) {
-            console.log("res.data middleware", res.data);
             setUser(await res.data);
           }
         });
-        localStorage.removeItem("username");
-        localStorage.removeItem("password")
     } catch (error) {
-      console.log(error.message);
     } finally {
       setIsloading(false);
     }
