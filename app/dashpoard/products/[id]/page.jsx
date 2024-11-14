@@ -17,6 +17,8 @@ const SingleProductPage = () => {
     mainImage: "",
     description: "",
   });
+  
+  
   const [isLoading, setIsLoading] = useState(true);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 

@@ -9,13 +9,15 @@ import Image from "next/image";
 
 const AddProductPage = () => {
   const fileInputRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState("");
   const [product, setProduct] = useState({
     title: "",
     location: "",
-    status: "",
+    status: "available",
     description: "",
+    mainImage: selectedFile,
   });
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const handleChange = (e) => {
@@ -39,45 +41,59 @@ const AddProductPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     const jwt = localStorage.getItem("jwt");
-
+  
     if (!jwt) {
       toast.error("Please log in to add the product.");
       return;
     }
-
+  
     try {
       const formData = new FormData();
       formData.append("title", product.title);
       formData.append("location", product.location);
-      formData.append("status", product.status);
+      formData.append("status", product.status || "available"); 
       formData.append("description", product.description);
       if (selectedFile) {
-        formData.append("media", selectedFile);
+        formData.append("mainImage", selectedFile);
       }
-
-      await axios.post(`${apiUrl}/compound/add`, formData, {
+      console.log(formData);
+      
+  
+      // إرسال الطلب مع التوكن
+      const response = await axios.post(`${apiUrl}/compound/add`, formData, {
         headers: {
           Authorization: `Bearer ${jwt}`,
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
       });
-
+      console.log(response.data);
+  
       toast.success("Compound added successfully!");
       setProduct({
         title: "",
         location: "",
-        status: "",
+        status: "available", // إعادة تعيين الحالة للقيمة الافتراضية
         description: "",
         images: [],
       });
       setSelectedFile(null);
     } catch (error) {
+      // عرض رسالة الخطأ في حالة فشل الطلب
       console.error("Error adding compound:", error);
-      toast.error(error?.response?.data?.error);
+      if (error?.response?.data?.error) {
+        toast.error(error.response.data.error); // عرض الخطأ من الخادم
+        
+      } else {
+        toast.error("Something went wrong, please try again.");
+      }
+      
+      
     }
   };
+  
 
   const handleDeleteImage = () => {
     setSelectedFile(null);
@@ -152,6 +168,7 @@ const AddProductPage = () => {
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}
+            value={product.mainImage}
             style={{ display: "none" }}
             accept="image/*, video/*"
           />
@@ -179,7 +196,7 @@ const AddProductPage = () => {
           <select
             name="status"
             id="status"
-            value={product.status}
+            value={product.status || "available"}
             onChange={handleChange}
           >
             <option value="available">Available</option>
