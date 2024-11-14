@@ -17,7 +17,7 @@ const Featured = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`${apiUrl}/compound`);
-        console.log(response.data);
+       
         
         setProducts(response.data.slice(0, 3)); // Get only the first 3 products
         setLoading(false); // Set loading to false after data is fetched
