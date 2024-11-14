@@ -29,7 +29,7 @@ const FeatureProjects = () => {
   });
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 my-10">
       {/* Buttons section */}
       <div className="flex flex-wrap justify-center items-center text-center mb-5 font-sans text-lg font-bold gap-4">
         <button

@@ -8,9 +8,12 @@ const MapComponent = dynamic(() => import("../lib/MapComponent"), {
 const Projects = () => {
   return (
     <div>
-      <MapComponent />
-      <FeatureProjects/>
-      <Category/>
+      <div className="h-[450px]">
+        <MapComponent />
+      </div>
+
+      <FeatureProjects />
+      <Category />
     </div>
   );
 };

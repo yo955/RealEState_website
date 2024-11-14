@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
-
+import MapComponent from "@/app/lib/MapComponent";
 const Apartments = () => {
   const { ProductsDetails } = useParams();
   const [apartments, setApartments] = useState([]);
@@ -115,11 +115,14 @@ const Apartments = () => {
         ) : (
           <p
             key={compound._id}
-            className="dark:text-white text-xl font-sans font-medium text-center"
+            className="dark:text-white text-xl font-sans font-medium text-center my-8"
           >
             {compound.description}
           </p>
         )}
+      </div>
+      <div className="w-1/2 mx-auto h-[450px]">
+        <MapComponent />
       </div>
     </section>
   );
