@@ -106,7 +106,7 @@ const AddProductPage = () => {
   return (
     <section className={styles.container}>
       <ToastContainer />
-      <section className="add-images flex flex-col w-1/5">
+      <section className="add-images flex  w-1/5">
         <div className={styles.infoContainer}>
           <label className="my-5">Add Img/Video</label>
           {selectedFile ? (

@@ -1,4 +1,4 @@
-import styles from "@/app/ui/dashpoard/users/singleuser/singleuser.module.css";
+import styles from "@/app/ui/dashpoard/users/singleuser/SingleUser.module.css";
 import Image from "next/image";
 const SingleUserPage = () => {
   return (

@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -17,8 +17,7 @@ const SingleProductPage = () => {
     mainImage: "",
     description: "",
   });
-  
-  
+
   const [isLoading, setIsLoading] = useState(true);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -74,7 +73,7 @@ const SingleProductPage = () => {
 
   return (
     <div className={styles.container}>
-      <ToastContainer /> 
+      <ToastContainer />
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           <Image

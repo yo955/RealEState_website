@@ -1,20 +1,20 @@
 "use client";
 import styles from "@/app/ui/dashpoard/products/products.module.css";
-import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "@/app/ui/dashpoard/search/Search";
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify"; // استيراد الـ Toastify
+import { ToastContainer, toast } from "react-toastify";
+import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 
 const ProductsPage = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [compound, setCompound] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [compoundToDelete, setCompoundToDelete] = useState(null); // لتخزين معرف المنتج الذي سيتم حذفه
-  const [showPopup, setShowPopup] = useState(false); // لعرض الـ popup
+  const [compoundToDelete, setCompoundToDelete] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
 
   const trimText = useCallback((text) => {
     return text.length > 10 ? text.slice(0, 10) + "..." : text;
@@ -41,12 +41,18 @@ const ProductsPage = () => {
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
       });
-      setCompound(compound.filter((product) => product._id !== compoundToDelete)); // حذف المنتج من الواجهة
-      setShowPopup(false); // إغلاق الـ popup بعد الحذف
-      toast.success("Product deleted successfully!", { position: "bottom-right" }); // عرض Toast عند الحذف بنجاح
+      setCompound(
+        compound.filter((product) => product._id !== compoundToDelete)
+      );
+      setShowPopup(false);
+      toast.success("Product deleted successfully!", {
+        position: "bottom-right",
+      });
     } catch (error) {
       console.error("Error deleting compound:", error);
-      toast.error("Error deleting product. Please try again.", { position: "bottom-right" }); // عرض Toast عند حدوث خطأ
+      toast.error("Error deleting product. Please try again.", {
+        position: "bottom-right",
+      });
     }
   };
 
@@ -117,7 +123,7 @@ const ProductsPage = () => {
                       </button>
                     </Link>
                     <button
-                      onClick={() => openDeletePopup(product._id)} // إرسال معرف المنتج للحذف
+                      onClick={() => openDeletePopup(product._id)}
                       className={`${styles.button} ${styles.delete}`}
                     >
                       Delete
@@ -135,7 +141,9 @@ const ProductsPage = () => {
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-slate-400 p-6 rounded shadow-lg">
-            <h3 className="text-lg font-semibold">Are you sure you want to delete this product?</h3>
+            <h3 className="text-lg font-semibold">
+              Are you sure you want to delete this product?
+            </h3>
             <div className="flex justify-end space-x-4 mt-4">
               <button
                 onClick={closeDeletePopup}

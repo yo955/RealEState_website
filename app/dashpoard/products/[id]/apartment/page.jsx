@@ -6,8 +6,8 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Search from "@/app/ui/dashpoard/search/Search";
-import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 import { toast } from "react-toastify";
+import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 
 const ApartmentPage = () => {
   const { id } = useParams();
