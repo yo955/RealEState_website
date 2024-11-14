@@ -1,4 +1,4 @@
-import Pagination from "@/app/ui/dashpoard/pagination/pagination";
+import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 import Search from "@/app/ui/dashpoard/search/Search";
 import styles from "@/app/ui/dashpoard/users/users.module.css";
 import Image from "next/image";
