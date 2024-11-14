@@ -50,7 +50,7 @@ const Apartments = () => {
       getApartments();
       getCompound();
     }
-  }, [ProductsDetails, compound, apartments]);
+  }, [ProductsDetails]);
 
   return (
     <section className="apartments-section my-10">
