@@ -2,6 +2,7 @@
 import styles from "./sidebar.module.css";
 import MenuLink from "./menuLink/MenuLink";
 import Image from "next/image";
+import { PiBuildingApartment } from "react-icons/pi";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
@@ -14,7 +15,6 @@ import {
   MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
-
 
 import { useRouter } from "next/navigation";
 const menuItems = [
@@ -39,11 +39,11 @@ const menuItems = [
       {
         title: "Apartments",
         path: "/dashpoard/apartments",
-        icon: <MdAttachMoney />,
+        icon: <PiBuildingApartment />,
       },
     ],
   },
- 
+
   {
     title: "User",
     list: [
@@ -62,16 +62,13 @@ const menuItems = [
 ];
 
 const Sidebar = () => {
+  const router = useRouter();
 
-  const router = useRouter()
- 
   const logoutUser = async () => {
-    localStorage.removeItem("jwt");  
+    localStorage.removeItem("jwt");
     router.push("/login");
   };
-  
- 
- 
+
   return (
     <div className={styles.container}>
       <div className={styles.user}>
@@ -99,11 +96,10 @@ const Sidebar = () => {
           );
         })}
       </ul>
-        <div className={styles.logout} onClick={logoutUser}>
-          <MdLogout />
-          Logout
-        </div>
-   
+      <div className={styles.logout} onClick={logoutUser}>
+        <MdLogout />
+        Logout
+      </div>
     </div>
   );
 };
