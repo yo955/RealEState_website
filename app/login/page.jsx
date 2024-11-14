@@ -13,12 +13,12 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false); // For loading state
   const router = useRouter();
 
-  const { user } = useContext(Auth);
+  // const { user } = useContext(Auth);
 
   // Redirect user to dashboard if already logged in
-  if (user?._id) {
-    router.push("/dashpoard");
-  }
+  // if (user?._id) {
+  //   router.push("/dashpoard");
+  // }
 
   const handleLogin = async (e) => {
     e.preventDefault();
