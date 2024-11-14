@@ -10,17 +10,16 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [redirecting, setRedirecting] = useState(false); // New state to handle redirect
   const router = useRouter();
 
-  const token = localStorage.getItem("jwt");
   useEffect(() => {
+    const token = localStorage.getItem("jwt");
     if (token) {
+      setRedirecting(true); // Start redirecting if token is found
       router.push("/dashpoard");
     }
   }, [router]);
-  if (token) {
-    return <div>Loading...</div>;
-  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -40,14 +39,18 @@ const LoginPage = () => {
 
       if (response.data.token) {
         localStorage.setItem("jwt", response.data.token);
+        router.push("/dashpoard");
       }
-      router.push("/dashpoard");
     } catch (error) {
       setError(error?.response?.data?.error || "Something went wrong!");
     } finally {
       setLoading(false);
     }
   };
+
+  if (redirecting) {
+    return <div>Loading...</div>; // Show loading screen if redirecting
+  }
 
   return (
     <div className={styles.container}>
@@ -59,12 +62,14 @@ const LoginPage = () => {
           placeholder="username"
           value={username}
           onChange={(e) => setUserName(e.target.value)}
+          autoComplete="current-username"
         />
         <input
           type="password"
           placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="current-password"
         />
         <button type="submit" disabled={loading}>
           {loading ? <div className={styles.spinner}></div> : "Login"}

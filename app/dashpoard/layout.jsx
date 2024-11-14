@@ -7,19 +7,22 @@ import Footer from "../ui/dashpoard/footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Layout = ({ children }) => {
   const router = useRouter();
-  const token = localStorage.getItem("jwt");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const token = localStorage.getItem("jwt");
     if (!token) {
       router.push("/login");
+    } else {
+      setLoading(false);
     }
-  }, [token, router]);
+  }, [router]);
 
-  if (!token) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
