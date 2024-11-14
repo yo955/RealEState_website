@@ -34,9 +34,10 @@ const Apartments = () => {
   function getCompound() {
     setCompoundLoading(true);
     axios
-      .get(`${apiUrl}/compound`)
+      .get(`${apiUrl}/compound/find/${ProductsDetails}`)
       .then((res) => {
         setCompound(res.data);
+        console.log(res.data);
       })
       .catch(() => {
         setCompoundError("حدث خطأ أثناء جلب بيانات المجمعات");
@@ -49,7 +50,7 @@ const Apartments = () => {
       getApartments();
       getCompound();
     }
-  }, [ProductsDetails]);
+  }, [ProductsDetails, compound, apartments]);
 
   return (
     <section className="apartments-section my-10">
@@ -109,13 +110,9 @@ const Apartments = () => {
         {compoundLoading ? (
           <div>جاري تحميل بيانات المجمعات...</div>
         ) : compoundError ? (
-          <div>{compoundError}</div>
-        ) : compound.length === 0 ? (
-          <div>لا توجد بيانات مجمعات متاحة</div>
+          (<div>{compoundError}</div>)(<div>لا توجد بيانات مجمعات متاحة</div>)
         ) : (
-          compound.map((product) => (
-            <p key={product._id}>{product.description}</p>
-          ))
+          <p key={compound._id}>{compound.description}</p>
         )}
       </div>
     </section>
