@@ -1,48 +1,46 @@
 "use client";
 import styles from "@/app/ui/login/login.module.css";
 import "@/app/ui/dashpoard-globals.css";
-import { useContext, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { Auth } from "../dashpoard/middleware/Middleware";
 
 const LoginPage = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); // For loading state
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // const { user } = useContext(Auth);
-
-  // Redirect user to dashboard if already logged in
-  // if (user?._id) {
-  //   router.push("/dashpoard");
-  // }
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      router.push("/dashpoard");
+    }
+  }, [router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      await axios
-        .post("https://real-state-liard.vercel.app/user/login", {
+      const response = await axios.post(
+        "https://real-state-liard.vercel.app/user/login",
+        {
           username,
           password,
-        }, {
+        },
+        {
           withCredentials: true,
-        })
-        .then(async (res) => {
-          if (res.data.token) {
-            localStorage.setItem("jwt", res.data.token);
-          }
-          router.push("/dashpoard");
-        })
-        .catch((error) => {
-          setError(error?.response?.data?.error || "Something went wrong!");
-        });
+        }
+      );
+
+      if (response.data.token) {
+        localStorage.setItem("jwt", response.data.token);
+      }
+      router.push("/dashpoard");
     } catch (error) {
-      setError("Something went wrong!");
+      setError(error?.response?.data?.error || "Something went wrong!");
     } finally {
       setLoading(false);
     }
@@ -66,11 +64,7 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" disabled={loading}>
-          {loading ? (
-            <div className={styles.spinner}></div> // Display spinner while loading
-          ) : (
-            "Login"
-          )}
+          {loading ? <div className={styles.spinner}></div> : "Login"}
         </button>
       </form>
     </div>
