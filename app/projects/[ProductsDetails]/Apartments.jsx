@@ -37,7 +37,6 @@ const Apartments = () => {
       .get(`${apiUrl}/compound/find/${ProductsDetails}`)
       .then((res) => {
         setCompound(res.data);
-        console.log(res.data);
       })
       .catch(() => {
         setCompoundError("حدث خطأ أثناء جلب بيانات المجمعات");
@@ -98,7 +97,7 @@ const Apartments = () => {
         ) : error ? (
           <div>{error}</div>
         ) : apartments.length === 0 ? (
-          <div>لا توجد بيانات متاحة</div>
+          <div></div>
         ) : (
           apartments.map((apartment) => (
             <ApartmentCard key={apartment._id} apartment={apartment} />
@@ -110,9 +109,16 @@ const Apartments = () => {
         {compoundLoading ? (
           <div>جاري تحميل بيانات المجمعات...</div>
         ) : compoundError ? (
-          (<div>{compoundError}</div>)(<div>لا توجد بيانات مجمعات متاحة</div>)
+          <div>{compoundError}</div>
+        ) : compound.length === 0 ? (
+          <div>لا توجد بيانات مجمعات متاحة</div>
         ) : (
-          <p key={compound._id}>{compound.description}</p>
+          <p
+            key={compound._id}
+            className="dark:text-white text-xl font-sans font-medium text-center"
+          >
+            {compound.description}
+          </p>
         )}
       </div>
     </section>
