@@ -12,12 +12,15 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const token = localStorage.getItem("jwt");
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
     if (token) {
       router.push("/dashpoard");
     }
   }, [router]);
+  if (token) {
+    return <div>Loading...</div>;
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
