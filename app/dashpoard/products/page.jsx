@@ -73,7 +73,7 @@ const ProductsPage = () => {
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for a product..." />
-        <Link href="/dashpoard/products/add">
+        <Link prefetch={true} href="/dashpoard/products/add">
           <button className={styles.addButton}>Add New</button>
         </Link>
       </div>
@@ -117,7 +117,7 @@ const ProductsPage = () => {
                 <td>{trimText(product.updatedAt)}</td>
                 <td>
                   <div className={styles.buttons}>
-                    <Link href={`/dashpoard/products/${product._id}`}>
+                    <Link prefetch={true} href={`/dashpoard/products/${product._id}`}>
                       <button className={`${styles.button} ${styles.view}`}>
                         View
                       </button>

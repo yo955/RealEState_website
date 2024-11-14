@@ -1,6 +1,5 @@
 import { IoLocationSharp } from "react-icons/io5";
 import Image from "next/image";
-import Link from "next/link";
 
 const Card = ({ status, imageUrl, location, projectTitle }) => {
   const statusColors = {

@@ -61,7 +61,7 @@ const FeatureAbout = () => {
                   تجربة سكن استثنائية تجمع بين الاسترخاء والتميز.
                 </p>
               </div>
-              <Link href="/projects">
+              <Link prefetch={true} href="/projects">
                 <button className="text-white bg-black py-2 px-4 rounded-md mt-2 lg:w-40 md:py-4 md:px-6 border dark:border-gray-500">
                   شاهد احدث المشاريع
                 </button>

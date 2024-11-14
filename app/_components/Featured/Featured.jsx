@@ -17,8 +17,7 @@ const Featured = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`${apiUrl}/compound`);
-       
-        
+
         setProducts(response.data.slice(0, 3)); // Get only the first 3 products
         setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
@@ -38,7 +37,7 @@ const Featured = () => {
     return (
       <AosWrapper key={index}>
         <div data-aos="zoom-in" key={item._id}>
-          <Link href={link}>
+          <Link prefetch={true} href={link}>
             <Card
               status={item.status}
               imageUrl={item.mainImage}
@@ -54,8 +53,10 @@ const Featured = () => {
   return (
     <section className="mt-16 pb-12">
       <div className="header flex items-center justify-between container mb-10">
-        <h1 className="text-black text-3xl font-bold dark:text-white">مشاريعنا</h1>
-        <Link href="/projects">
+        <h1 className="text-black text-3xl font-bold dark:text-white">
+          مشاريعنا
+        </h1>
+        <Link prefetch={true} href="/projects">
           <h1 className="text-black text-2xl from-neutral-400 border-b-2 border-black cursor-pointer flex items-center dark:text-white">
             جميع المشاريع <FaArrowLeft className="m-1" />
           </h1>

@@ -21,7 +21,7 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* اللوجو يظهر على اليسار في جميع الشاشات */}
           <div className="flex items-center gap-4">
-            <Link className="block text-teal-600" href="/">
+            <Link prefetch={true} className="block text-teal-600" href="/">
               <span className="sr-only">Home</span>
               <div className="relative w-24 h-24">
                 <Image
@@ -66,6 +66,7 @@ const Header = () => {
               <ul className="flex items-center gap-6 text-sm font-bold">
                 <li>
                   <Link
+                    prefetch={true}
                     className="text-white transition hover:text-gray-500/75 text-xl"
                     href="/"
                   >
@@ -74,6 +75,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
+                    prefetch={true}
                     href="/about-us"
                     className="text-white transition hover:text-gray-500/75 text-xl"
                   >
@@ -82,6 +84,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
+                    prefetch={true}
                     className="text-white transition hover:text-gray-500/75 text-xl"
                     href="/projects"
                   >
@@ -111,6 +114,7 @@ const Header = () => {
             <ul className="flex flex-col items-end text-sm font-bold gap-4">
               <li>
                 <Link
+                  prefetch={true}
                   className="text-white transition hover:text-gray-500/75"
                   href="/"
                   onClick={closeMenu} // غلق القائمة عند النقر على الرابط
@@ -120,9 +124,10 @@ const Header = () => {
               </li>
               <li>
                 <Link
+                  prefetch={true}
                   className="text-white transition hover:text-gray-500/75"
                   href="/about-us"
-                  onClick={closeMenu} // غلق القائمة عند النقر على الرابط
+                  onClick={closeMenu}
                 >
                   من نحن
                 </Link>
@@ -131,7 +136,8 @@ const Header = () => {
                 <Link
                   className="text-white transition hover:text-gray-500/75"
                   href="/projects"
-                  onClick={closeMenu} // غلق القائمة عند النقر على الرابط
+                  prefetch={true}
+                  onClick={closeMenu}
                 >
                   مشاريعنا
                 </Link>

@@ -85,7 +85,7 @@ const FeatureProjects = () => {
               }
 
               return (
-                <Link href={link} key={product._id}>
+                <Link prefetch={true} href={link} key={product._id}>
                   <ProjectsCard
                     status={product.status}
                     imageUrl={product.mainImage}

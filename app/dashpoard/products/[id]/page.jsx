@@ -127,7 +127,7 @@ const SingleProductPage = () => {
           ></textarea>
           <button type="submit">Update</button>
         </form>
-        <Link href={`/dashpoard/products/${id}/apartment`}>
+        <Link prefetch={true} href={`/dashpoard/products/${id}/apartment`}>
           <button className={styles.AddApartmentBtn}>Add an apartment</button>
         </Link>
       </div>

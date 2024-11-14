@@ -1,20 +1,15 @@
-
 import Link from "next/link";
 const HeroAbout = () => {
-
-
   return (
     <section
       className="relative bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: 'url(https://prod-images.cooingestate.com/processed/property_image/image/32810/high.webp)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center', 
-        backgroundRepeat: 'no-repeat',
-      
-       
+        backgroundImage:
+          "url(https://prod-images.cooingestate.com/processed/property_image/image/32810/high.webp)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
-      
     >
       <div className="absolute inset-0 bg-gray-900/75 sm:bg-transparent sm:from-[#1118278b] ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"></div>
 
@@ -32,6 +27,7 @@ const HeroAbout = () => {
 
           <div className="mt-8 flex flex-wrap gap-4 text-center">
             <Link
+              prefetch={true}
               href="/projects"
               className="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto"
             >

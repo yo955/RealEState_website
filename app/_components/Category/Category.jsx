@@ -10,7 +10,7 @@ const Category = () => {
               مهتم بمشاريعنا القادمة؟
             </h1>
             <Link
-              href="https://wa.me/201555909247" // استبدل "201012345678" برقمك الفعلي
+              href="https://wa.me/201555909247" 
               className="text-white transition hover:text-gray-500/75 text-xl"
               target="_blank"
               rel="noopener noreferrer"

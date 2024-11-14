@@ -8,6 +8,7 @@ const MenuLink = ({ item }) => {
 
   return (
     <Link
+      prefetch={true}
       href={item.path}
       className={`${styles.container} ${
         pathname === item.path && styles.active

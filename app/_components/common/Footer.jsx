@@ -19,17 +19,17 @@ const Footer = () => {
           <h3 className="text-xl font-bold mb-4">روابط سريعة</h3>
           <ul>
             <li>
-              <Link href="#" className="hover:underline">
+              <Link href="#" prefetch={true} className="hover:underline">
                 الرئيسية
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:underline">
+              <Link href="#"prefetch={true} className="hover:underline">
                 مشاريعنا
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:underline">
+              <Link href="#" prefetch={true} className="hover:underline">
                 من نحن
               </Link>
             </li>

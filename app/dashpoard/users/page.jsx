@@ -8,7 +8,7 @@ const UsersPage = () => {
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for a user..." />
-        <Link href="/dashpoard/users/add">
+        <Link prefetch={true} href="/dashpoard/users/add">
           <button className={styles.addButton}>Add New</button>
         </Link>
       </div>
@@ -43,7 +43,7 @@ const UsersPage = () => {
             <td>Active</td>
             <td>
               <div className={styles.buttons}>
-                <Link href="/dashpoard/users/test">
+                <Link prefetch={true} href="/dashpoard/users/test">
                   <button className={`${styles.button} ${styles.view}`}>
                     View
                   </button>
