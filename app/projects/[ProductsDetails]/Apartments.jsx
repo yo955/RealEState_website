@@ -32,8 +32,8 @@ const Apartments = () => {
   return (
     <section className="apartments-section my-10">
       <div className="text flex flex-col justify-center items-center gap-8 w-1/2 mx-auto">
-        <div className="icons flex justify-center gap-8 ">
-          <div className="right flex items-end gap-2">
+        <div className="icons lg:flex justify-center gap-8 block  ">
+          <div className="right flex items-end gap-2 my-3 md:my-0">
             <PiBuildings className="text-5xl dark:text-white " />
             <h1 className="font-light font-sans text-3xl flex items-center  dark:text-white">
               المبانى : <span className="text-3xl font-medium">1</span>
@@ -49,7 +49,7 @@ const Apartments = () => {
             </h1>
           </div>
         </div>
-        <h1 className="text-3xl font-extrabold  dark:text-white">
+        <h1 className="text-3xl font-extrabold  dark:text-white text-center">
           حياة الرفاهية في قلب شمال العاصمة
         </h1>
         <h2 className="text-2xl font-normal font-sans text-center leading-10  dark:text-white">
@@ -62,7 +62,7 @@ const Apartments = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <button className="btn bg-transparent font-sans border-[2px] flex justify-center items-center text-xl border-[#c39a62] hover:bg-[#c39a62] p-4 rounded-full h-[40px] w-[300px] dark:text-white">
+          <button className="btn bg-transparent font-sans border-[2px] flex justify-center items-center text-xl border-[#c39a62] hover:bg-[#c39a62] p-4 rounded-full h-[40px] w-[300px] dark:text-white hover:text-s">
             تحدث مع مندوب المبيعات
           </button>
         </Link>
