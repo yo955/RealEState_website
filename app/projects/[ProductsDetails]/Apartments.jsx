@@ -42,14 +42,14 @@ const Apartments = () => {
           <div className="left flex items-end gap-2">
             <PiBuildingApartmentDuotone className="text-5xl dark:text-white" />
             <h1 className="font-light font-sans text-3xl flex items-center  dark:text-white">
-              الوحدات :{" "}
+              الوحدات :
               <span className="text-3xl font-medium  dark:text-white">
                 {apartments.length}
               </span>
             </h1>
           </div>
         </div>
-        <h1 className="text-3xl font-extrabold  dark:text-white">
+        <h1 className="text-3xl font-extrabold  dark:text-red-500">
           حياة الرفاهية في قلب شمال العاصمة
         </h1>
         <h2 className="text-2xl font-normal font-sans text-center leading-10  dark:text-white">
