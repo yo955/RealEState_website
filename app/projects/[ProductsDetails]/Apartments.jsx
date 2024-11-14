@@ -49,7 +49,7 @@ const Apartments = () => {
             </h1>
           </div>
         </div>
-        <h1 className="text-3xl font-extrabold  dark:text-red-500">
+        <h1 className="text-3xl font-extrabold  dark:text-white">
           حياة الرفاهية في قلب شمال العاصمة
         </h1>
         <h2 className="text-2xl font-normal font-sans text-center leading-10  dark:text-white">
