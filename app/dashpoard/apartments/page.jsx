@@ -27,7 +27,7 @@ const ApartmentsSide = () => {
       {apartments.length > 0 ? (
         apartments.map((apartment) => {
           return (
-            <div key={apartment._id} className="grid grid-cols-4 gap-5">
+            <div key={apartment._id} className="flex  gap-5 ">
               <ApartmentCard apartment={apartment} />
             </div>
           );

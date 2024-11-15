@@ -65,7 +65,7 @@ const ApartmentPage = () => {
     <div className={styles.container}>
       <div className={styles.top}>
         <Search placeholder="Search for a product..." />
-        <Link prefetch={true} href="/dashpoard/products/add">
+        <Link prefetch={true} href={`/dashpoard/products/${id}/apartment/add`}>
           <button className={styles.addButton}>Add New</button>
         </Link>
       </div>
