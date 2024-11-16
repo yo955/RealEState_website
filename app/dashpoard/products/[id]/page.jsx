@@ -59,12 +59,12 @@ const SingleProductPage = () => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      toast.success("Apartment updated successfully!", {
+      toast.success("Compound updated successfully!", {
         position: "bottom-right",
       });
     } catch (error) {
-      console.error("Error updating apartment:", error);
-      toast.error("Failed to update apartment.", {
+      console.error("Error updating compound:", error);
+      toast.error("Failed to update compound.", {
         position: "bottom-right",
       });
     }

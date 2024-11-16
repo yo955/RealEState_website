@@ -22,6 +22,7 @@ const SingleApartmentPage = () => {
   });
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state to track form submission
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -35,7 +36,7 @@ const SingleApartmentPage = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
         setIsLoading(false);
-        toast.error("Failed to load apartment data."); // عرض Toast عند الفشل
+        toast.error("Failed to load apartment data.");
       });
   }, [apartmentid]);
 
@@ -43,12 +44,13 @@ const SingleApartmentPage = () => {
     const { name, value } = e.target;
     setApartment((prevApartment) => ({
       ...prevApartment,
-      [name.toLowerCase()]: value,
+      [name]: value, // Directly use the camelCase name
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true); // Start submitting
     try {
       await axios.patch(
         `${apiUrl}/apartment/update/${apartmentid}`,
@@ -64,6 +66,8 @@ const SingleApartmentPage = () => {
     } catch (error) {
       console.error("Error updating apartment:", error);
       toast.error("Failed to update apartment.");
+    } finally {
+      setIsSubmitting(false); // Stop submitting
     }
   };
 
@@ -87,11 +91,11 @@ const SingleApartmentPage = () => {
 
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <label>identity</label>
+          <label>Identity</label>
           <input
             type="text"
             name="identity"
-            placeholder="identity"
+            placeholder="Identity"
             value={apartment.identity}
             onChange={handleChange}
           />
@@ -111,11 +115,11 @@ const SingleApartmentPage = () => {
             value={apartment.space}
             onChange={handleChange}
           />
-          <label>floor</label>
+          <label>Floor</label>
           <input
             type="number"
             name="floor"
-            placeholder="floor"
+            placeholder="Floor"
             value={apartment.floor}
             onChange={handleChange}
           />
@@ -140,12 +144,16 @@ const SingleApartmentPage = () => {
           </select>
           <label>Description</label>
           <textarea
-            name="desc"
-            id="desc"
+            name="description"
+            id="description"
             rows={5}
-            placeholder="description"
+            placeholder="Description"
+            value={apartment.description}
+            onChange={handleChange}
           ></textarea>
-          <button type="submit">Update</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Updating..." : "Update"}
+          </button>
         </form>
       </div>
     </div>

@@ -117,7 +117,10 @@ const ProductsPage = () => {
                 <td>{trimText(product.updatedAt)}</td>
                 <td>
                   <div className={styles.buttons}>
-                    <Link prefetch={true} href={`/dashpoard/products/${product._id}`}>
+                    <Link
+                      prefetch={true}
+                      href={`/dashpoard/products/${product._id}`}
+                    >
                       <button className={`${styles.button} ${styles.view}`}>
                         View
                       </button>
@@ -142,7 +145,7 @@ const ProductsPage = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-slate-400 p-6 rounded shadow-lg">
             <h3 className="text-lg font-semibold">
-              Are you sure you want to delete this product?
+              Are you sure you want to delete this Compound?
             </h3>
             <div className="flex justify-end space-x-4 mt-4">
               <button
