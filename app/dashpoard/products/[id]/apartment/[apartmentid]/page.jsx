@@ -4,7 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SingleApartmentPage = () => {
@@ -14,11 +14,13 @@ const SingleApartmentPage = () => {
     mainImage: "",
     rooms: "",
     space: "",
+    floor: "",
     bathrooms: "",
     status: "",
     description: "",
+    identity: "",
   });
-  
+
   const [isLoading, setIsLoading] = useState(true);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -48,16 +50,20 @@ const SingleApartmentPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`${apiUrl}/apartment/update/${apartmentid}`, apartment, {
-        withCredentials: true,
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      });
-      toast.success("Apartment updated successfully!"); 
+      await axios.patch(
+        `${apiUrl}/apartment/update/${apartmentid}`,
+        apartment,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        }
+      );
+      toast.success("Apartment updated successfully!");
     } catch (error) {
       console.error("Error updating apartment:", error);
-      toast.error("Failed to update apartment."); 
+      toast.error("Failed to update apartment.");
     }
   };
 
@@ -81,6 +87,14 @@ const SingleApartmentPage = () => {
 
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit} className={styles.form}>
+          <label>identity</label>
+          <input
+            type="text"
+            name="identity"
+            placeholder="identity"
+            value={apartment.identity}
+            onChange={handleChange}
+          />
           <label>Rooms</label>
           <input
             type="number"
@@ -95,6 +109,14 @@ const SingleApartmentPage = () => {
             name="space"
             placeholder="Space"
             value={apartment.space}
+            onChange={handleChange}
+          />
+          <label>floor</label>
+          <input
+            type="number"
+            name="floor"
+            placeholder="floor"
+            value={apartment.floor}
             onChange={handleChange}
           />
           <label>Bathrooms</label>
@@ -116,7 +138,13 @@ const SingleApartmentPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
-
+          <label>Description</label>
+          <textarea
+            name="desc"
+            id="desc"
+            rows={5}
+            placeholder="description"
+          ></textarea>
           <button type="submit">Update</button>
         </form>
       </div>

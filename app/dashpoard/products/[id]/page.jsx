@@ -16,6 +16,7 @@ const SingleProductPage = () => {
     status: "",
     mainImage: "",
     description: "",
+    address: "",
   });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -115,6 +116,14 @@ const SingleProductPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
+          <label>Address</label>
+          <input
+            type="text"
+            name="address"
+            placeholder="address"
+            value={product.address}
+            onChange={handleChange}
+          />
           <label>Description</label>
           <textarea
             name="description"

@@ -71,8 +71,9 @@ const ApartmentPage = () => {
       </div>
       <table className={styles.table}>
         <thead>
-          <tr>
+          <tr className="text-center">
             <td>Img</td>
+            <td>Identity</td>
             <td>Rooms</td>
             <td>Space</td>
             <td>Bathrooms</td>
@@ -103,10 +104,11 @@ const ApartmentPage = () => {
                     />
                   </div>
                 </td>
-                <td>{apartment.rooms}</td>
-                <td>{apartment.space}</td>
-                <td>{apartment.bathrooms}</td>
-                <td>{apartment.description}</td>
+                <td className="text-center">{apartment.identity}</td>
+                <td className="text-center">{apartment.rooms}</td>
+                <td className="text-center">{apartment.space}</td>
+                <td className="text-center">{apartment.bathrooms}</td>
+                <td className="text-wrap">{apartment.description}</td>
                 <td>{apartment.status}</td>
                 <td>
                   <div className={styles.buttons}>

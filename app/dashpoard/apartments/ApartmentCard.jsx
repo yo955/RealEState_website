@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ApartmentCard = ({ apartment }) => {
   return (
-    <div className="card hover:shadow-lg transition-all duration-150 my-3 grid grid-cols-2">
+    <div className="card hover:shadow-lg transition-all duration-150 my-3 ">
       <div className="relative block rounded-3xl border border-gray-100 overflow-hidden shadow-lg  dark:border-gray-600">
         <span
           className={`absolute w-1/4 text-center  justify-center inline-table items-center  top-6 left-1 z-10 rounded-r-lg px-4 py-1 text-xl font-medium uppercase tracking-wide text-white `}

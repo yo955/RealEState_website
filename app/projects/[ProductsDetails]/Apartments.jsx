@@ -113,12 +113,20 @@ const Apartments = () => {
         ) : compound.length === 0 ? (
           <div>لا توجد بيانات مجمعات متاحة</div>
         ) : (
-          <p
-            key={compound._id}
-            className="dark:text-white text-xl font-sans font-medium text-center my-8"
-          >
-            {compound.description}
-          </p>
+          <div className="address-description">
+            <h1
+              key={compound._id}
+              className="dark:text-white text-3xl font-sans font-bold text-center my-2 w-1/2 mx-auto"
+            >
+              {compound.address}
+            </h1>
+            <p
+              key={compound._id}
+              className="dark:text-white text-2xl text-slate-600 font-normal text-center my-5 w-1/2 mx-auto leading-8"
+            >
+              {compound.description}
+            </p>
+          </div>
         )}
       </div>
       <div className="w-1/2 mx-auto h-[450px]">

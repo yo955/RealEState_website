@@ -24,17 +24,15 @@ const ApartmentsSide = () => {
 
   return (
     <>
-      {apartments.length > 0 ? (
-        apartments.map((apartment) => {
-          return (
-            <div key={apartment._id} className="flex  gap-5 ">
-              <ApartmentCard apartment={apartment} />
-            </div>
-          );
-        })
-      ) : (
-        <div>loading...</div>
-      )}
+      <div className="grid grid-cols-3   gap-5 ">
+        {apartments.length > 0 ? (
+          apartments.map((apartment) => {
+            return <ApartmentCard key={apartment._id} apartment={apartment} />;
+          })
+        ) : (
+          <div>loading...</div>
+        )}
+      </div>
     </>
   );
 };

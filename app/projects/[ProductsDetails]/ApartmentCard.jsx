@@ -8,32 +8,8 @@ import Image from "next/image";
 const ApartmentCard = ({ apartment }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const statusColors = {
-    متاح: "bg-green-600 ",
-    قريبا: "bg-yellow-500",
-    مباع: "bg-red-600",
-    available: "bg-green-600 ",
-    soon: "bg-yellow-500",
-    sold: "bg-red-600",
-  };
-
-  function translate(status) {
-    switch (status) {
-      case "available":
-        return "متاح";
-      case "soon":
-        return "قريبا";
-      case "sold":
-        return "مباع";
-      default:
-        return status;
-    }
-  }
-
   const togglePopup = () => {
-    if (apartment.status != "soon") {
-      setIsOpen(!isOpen);
-    }
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -44,12 +20,8 @@ const ApartmentCard = ({ apartment }) => {
       >
         <div className="relative block rounded-3xl border border-gray-100 overflow-hidden shadow-lg dark:border-gray-600">
           <span
-            className={`absolute w-1/4 text-center justify-center inline-table items-center top-6 left-1 z-10 rounded-r-lg px-4 py-1 text-xl font-medium uppercase tracking-wide text-white ${
-              statusColors[apartment.status]
-            }`}
-          >
-            {translate(apartment.status.toLowerCase())}
-          </span>
+            className={`absolute w-1/4 text-center justify-center inline-table items-center top-6 left-1 z-10 rounded-r-lg px-4 py-1 text-xl font-medium uppercase tracking-wide text-white `}
+          ></span>
 
           <div className="relative w-full h-56">
             <Image
@@ -65,7 +37,7 @@ const ApartmentCard = ({ apartment }) => {
           <div className="p-1 bg-white dark:bg-black py-4 ">
             <div className="flex flex-col justify-between px-2 mb-4 gap-3">
               <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
-                A-3
+                {apartment.identity}
               </h3>
               <div className="flex items-center text-gray-600 dark:text-white">
                 <h1 className="text-xl font-semibold dark:text-white">
@@ -111,7 +83,7 @@ const ApartmentCard = ({ apartment }) => {
           >
             <div className="w-14 h-14 p-4  absolute top-0 right-0 bottom-auto left-auto float-right flex justify-center items-center z-10">
               <button
-                onClick={togglePopup}
+                 onClick={togglePopup}
                 className="absolute  text-gray-800 hover:text-gray-800 text-3xl dark:text-white  "
               >
                 &times; {/* The X icon */}

@@ -1,8 +1,20 @@
 .container {
-  display: flex;
+  /* display: flex; */
   gap: 50px;
   margin-top: 20px;
 
+}
+.infoContainertop {
+  /* flex: 1; */
+  background-color: var(--bgSoft);
+  color: var(--textSoft);
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 10px;
+  height: max-content;
+  margin:  5px ;
+  background-color: teal;
+  width:30%;
 }
 .infoContainer {
   flex: 1;
@@ -13,7 +25,7 @@
   border-radius: 10px;
   height: max-content;
   margin:  5px ;
-  width:100%;
+  width:50%;
 }
 .imgContainer {
   width: 100%;
@@ -25,7 +37,7 @@
 }
 
 .formContainer {
-  flex: 3;
+  flex: 1;
   background-color: var(--bgSoft);
   padding: 20px;
   border-radius: 10px;
