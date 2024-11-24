@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
-import MapComponent from "@/app/lib/MapComponent";
+import MapWithMarker from "@/app/lib/MapComponent";
 const Apartments = () => {
   const { ProductsDetails } = useParams();
   const [apartments, setApartments] = useState([]);
@@ -111,7 +111,7 @@ const Apartments = () => {
         ) : compoundError ? (
           <div>{compoundError}</div>
         ) : compound.length === 0 ? (
-          <div>لا توجد بيانات مجمعات متاحة</div>
+          <div></div>
         ) : (
           <div className="address-description">
             <h1
@@ -129,8 +129,8 @@ const Apartments = () => {
           </div>
         )}
       </div>
-      <div className="w-1/2 mx-auto h-[450px]">
-        <MapComponent />
+      <div className="h-[450px]">
+        <MapWithMarker width="50%" radius="20px"/>
       </div>
     </section>
   );

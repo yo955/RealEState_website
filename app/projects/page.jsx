@@ -9,7 +9,7 @@ const Projects = () => {
   return (
     <div>
       <div className="h-[450px]">
-        <MapComponent />
+        <MapComponent width="100%" />
       </div>
 
       <FeatureProjects />
