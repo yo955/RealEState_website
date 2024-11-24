@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AosWrapper from "../lib/ScrollAnimation";
 import Link from "next/link";
+
 const FeatureProjects = () => {
   const [filter, setFilter] = useState("all");
   const [productsData, setProductsData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6; // عدد العناصر في كل صفحة
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  // جلب البيانات باستخدام Axios
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -27,6 +30,14 @@ const FeatureProjects = () => {
     if (filter === "all") return true;
     return product.status === filter;
   });
+
+  // تحديد المنتجات للصفحة الحالية
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+  // حساب عدد الصفحات
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   return (
     <div className="container mx-auto p-4 my-10">
@@ -78,7 +89,7 @@ const FeatureProjects = () => {
       <AosWrapper>
         <div data-aos="fade-down">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => {
+            {currentItems.map((product) => {
               let link = "";
               if (product.status === "available" || product.status === "sold") {
                 link = `/projects/${product._id}?image=${product.mainImage}`;
@@ -98,6 +109,23 @@ const FeatureProjects = () => {
           </div>
         </div>
       </AosWrapper>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-6">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            className={`mx-1 px-4 py-2 rounded-md transition-all duration-300 ${
+              currentPage === index + 1
+                ? "bg-orange-300"
+                : "bg-gray-200 hover:bg-orange-300"
+            }`}
+            onClick={() => setCurrentPage(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ const nextConfig = {
       "images.pexels.com",
       "www.cairoheights.com",
       "ucarecdn.com",
+      "res.cloudinary.com",
     ],
   },
 };
