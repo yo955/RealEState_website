@@ -6,6 +6,7 @@ const nextConfig = {
       "prod-images.cooingestate.com",
       "images.pexels.com",
       "www.cairoheights.com",
+      "ucarecdn.com",
     ],
   },
 };
