@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { AiOutlinePlus, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import Image from "next/image";
 import AddImageButton from "./components/AddImageButton";
+import UploadCareButton from "./components/UploadCare";
 
 
 const AddProductPage = () => {
@@ -15,12 +16,12 @@ const AddProductPage = () => {
   const [mainImage, setMainImage] = useState(null);
   const [additionalImages, setAdditionalImages] = useState([]);
   const [product, setProduct] = useState({
-    mainImage: "https://prod-images.cooingestate.com/processed/property_image/image/32810/high.webp",
+    mainImage: "",
     title: "",
     location: "",
     status: "available",
     description: "",
-    address:"رياض",
+    address:"",
     images: [],
   });
    useEffect(() => {
@@ -28,6 +29,9 @@ const AddProductPage = () => {
    }, [product])
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+   useEffect(() => {
+    
+   }, [additionalImagesRef]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
@@ -36,21 +40,23 @@ const AddProductPage = () => {
     }));
   };
 
-  const handleMainImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setMainImage(file);
-    }
-  };
+  // const handleMainImageChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     setMainImage(file);
+  //   }
+  // };
 
   const handleAdditionalImagesChange = (event) => {
     const files = Array.from(event.target.files);
     setAdditionalImages((prevImages) => [...prevImages, ...files]);
   };
 
-  const handleDeleteMainImage = () => {
-    setMainImage(null);
-  };
+ 
+  useEffect(() => {
+    console.log(product)
+  }, [product]);
+ 
 
   const handleDeleteAdditionalImage = (index) => {
     setAdditionalImages((prevImages) =>
@@ -58,14 +64,17 @@ const AddProductPage = () => {
     );
   };
 
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
+   const openFilePicker = ()=>{
+    const client = filestack.init("A1C2M0j5SS1GEN2ZwMdbhz");
+    const options = {
+      maxFiles: 20,
+      uploadInBackground: false,
+      onUploadDone: (res) => console.log(res),
+    };
+    const picker = client.picker(options);
+    picker.open();
+   }
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -113,62 +122,29 @@ const AddProductPage = () => {
     <section className={styles.container}>
       <ToastContainer />
       <section className="add-images flex justify-between items-start w-full">
-          <AddImageButton setProduct={setProduct}/>
-        {/* <div className={styles.infoContainertop}>
-          <label className="my-5">Add Main Image</label>
-          {mainImage ? (
-            <div>
-              <Image
-                src={URL.createObjectURL(mainImage)}
-                alt="Selected main image"
-                width={300}
-                height={300}
-                className="my-5"
-              />
-              <div className="flex items-center justify-between my-2">
-                <AiOutlineDelete
-                  size={24}
-                  onClick={handleDeleteMainImage}
-                  className="cursor-pointer text-red-700"
-                />
-              </div>
-            </div>
-          ) : (
-            <div
-              className="w-full flex justify-center bg-teal-400 my-5 text-teal-50 rounded-lg cursor-pointer"
-              onClick={() => mainImageRef.current.click()}
-            >
-              <AiOutlinePlus size={40} />
-            </div>
-          )}
-          <input
-            type="file"
-            ref={mainImageRef}
-            onChange={handleMainImageChange}
-            style={{ display: "none" }}
-            accept="image/*"
-          />
-        </div> */}
+
+         <AddImageButton uniqueKey={"mainImage"} id={"dsss"} setProduct={setProduct}/>
+       <UploadCareButton setProduct={setProduct} uniqueKey={"mainImage"}/>
+
+
+
 
         <div className={styles.infoContainer}>
-        <AddImageButton  />
+        {/* <AddImageButton  /> */}
+        {/* <AddImageButton uniqueKey="images" id={"sas"} setProduct={setProduct}/> */}
+        <UploadCareButton setProduct={setProduct} uniqueKey={"images"} isArray={true}/>
           <label className="my-5">Add Additional Images</label>
           <div
+          
             className="w- flex justify-center bg-teal-400 mt-5 text-teal-50 rounded-lg cursor-pointer"
-            onClick={() => additionalImagesRef.current.click()}
+            // onClick={() => additionalImagesRef.current.click()}
+            onClick={openFilePicker}
           >
            
            
             <AiOutlinePlus size={40} />
           </div>
-          {/* <input
-            type="file"
-            ref={additionalImagesRef}
-            multiple
-            onChange={handleAdditionalImagesChange}
-            style={{ display: "none" }}
-            accept="image/*"
-          /> */}
+          
           <div className="flex flex-wrap gap-2 mt-4">
             {additionalImages.map((image, index) => (
               <div key={index} className="relative">

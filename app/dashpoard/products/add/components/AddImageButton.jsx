@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
@@ -7,11 +7,11 @@ import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 
 import CloudinaryUploadWidget from "../utils/CloudinaryUploadWidget";
 
- function AddImageButton({setProduct}) {
+ function AddImageButton({setProduct,id,uniqueKey}) {
   const [publicId, setPublicId] = useState("");
-  const [cloudName,setCloudNmae] = useState("hzxyensd5");
+  const [cloudName,setCloudNmae] = useState("dmrpkvddb");
 
-  const [uploadPreset,setUpload] = useState("aoh4fpwm");
+  const [uploadPreset,setUpload] = useState("x0x_preset");
 
 
 
@@ -33,10 +33,11 @@ import CloudinaryUploadWidget from "../utils/CloudinaryUploadWidget";
   return (
     <>
     <div className="App">
-      <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} setProduct={setProduct}/>
+      <CloudinaryUploadWidget uniqueKey={uniqueKey} uwConfig={uwConfig} id={id} setPublicId={setPublicId} setProduct={setProduct}/>
 
       <div style={{ width: "500px" }} >
         <AdvancedImage
+        
         className="max-h-[100px] mt-[20px]"
           style={{ maxWidth: "100%" }}
           cldImg={myImage}
