@@ -8,7 +8,7 @@ import { AiOutlinePlus, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import Image from "next/image";
 import AddImageButton from "./components/AddImageButton";
 import UploadCareButton from "./components/UploadCare";
-
+import filestack from "filestack-js";
 
 const AddProductPage = () => {
   const mainImageRef = useRef(null);
@@ -16,22 +16,21 @@ const AddProductPage = () => {
   const [mainImage, setMainImage] = useState(null);
   const [additionalImages, setAdditionalImages] = useState([]);
   const [product, setProduct] = useState({
-    mainImage: "",
+    mainImage:
+      "https://prod-images.cooingestate.com/processed/property_image/image/32810/high.webp",
     title: "",
     location: "",
     status: "available",
     description: "",
-    address:"",
+    address: "رياض",
     images: [],
   });
-   useEffect(() => {
-   console.log(product)
-   }, [product])
+  useEffect(() => {
+    console.log(product);
+  }, [product]);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-   useEffect(() => {
-    
-   }, [additionalImagesRef]);
+  useEffect(() => {}, [additionalImagesRef]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
@@ -40,23 +39,14 @@ const AddProductPage = () => {
     }));
   };
 
-  // const handleMainImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     setMainImage(file);
-  //   }
-  // };
-
   const handleAdditionalImagesChange = (event) => {
     const files = Array.from(event.target.files);
     setAdditionalImages((prevImages) => [...prevImages, ...files]);
   };
 
- 
   useEffect(() => {
-    console.log(product)
+    console.log(product);
   }, [product]);
- 
 
   const handleDeleteAdditionalImage = (index) => {
     setAdditionalImages((prevImages) =>
@@ -64,7 +54,7 @@ const AddProductPage = () => {
     );
   };
 
-   const openFilePicker = ()=>{
+  const openFilePicker = () => {
     const client = filestack.init("A1C2M0j5SS1GEN2ZwMdbhz");
     const options = {
       maxFiles: 20,
@@ -73,8 +63,7 @@ const AddProductPage = () => {
     };
     const picker = client.picker(options);
     picker.open();
-   }
- 
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,20 +76,14 @@ const AddProductPage = () => {
     }
 
     try {
-    
+      await axios.post(`${apiUrl}/compound/add`, product, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+        withCredentials: true,
+      });
 
-       await axios.post(
-        `${apiUrl}/compound/add`,
-        product,
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-          withCredentials: true,
-        } 
-      );
-
-      toast.success("Apartment added successfully!");
+      toast.success("Compound added successfully!");
       setProduct({
         title: "",
         location: "",
@@ -122,29 +105,33 @@ const AddProductPage = () => {
     <section className={styles.container}>
       <ToastContainer />
       <section className="add-images flex justify-between items-start w-full">
-
-         <AddImageButton uniqueKey={"mainImage"} id={"dsss"} setProduct={setProduct}/>
-       <UploadCareButton setProduct={setProduct} uniqueKey={"mainImage"}/>
-
-
-
-
+        {/* <AddImageButton
+          uniqueKey={"mainImage"}
+          id={"dsss"}
+          setProduct={setProduct}
+        /> */}{" "}
+        {/***cloudinary btn***/}
         <div className={styles.infoContainer}>
-        {/* <AddImageButton  /> */}
-        {/* <AddImageButton uniqueKey="images" id={"sas"} setProduct={setProduct}/> */}
-        <UploadCareButton setProduct={setProduct} uniqueKey={"images"} isArray={true}/>
-          <label className="my-5">Add Additional Images</label>
-          <div
-          
-            className="w- flex justify-center bg-teal-400 mt-5 text-teal-50 rounded-lg cursor-pointer"
-            // onClick={() => additionalImagesRef.current.click()}
-            onClick={openFilePicker}
-          >
-           
-           
-            <AiOutlinePlus size={40} />
+          <div className="btn-container flex items-center justify-between gap-5">
+            <div className="add-mainImage">
+              <label className="my-5">Add Main Image</label>
+              <UploadCareButton
+                setProduct={setProduct}
+                uniqueKey={"mainImage"}
+                className="mt-5"
+              />
+            </div>
+            <div className="add-anotherImages">
+              <label className="my-5">Add Additional Images</label>
+              <UploadCareButton
+                setProduct={setProduct}
+                uniqueKey={"images"}
+                isArray={true}
+                className="mt-5"
+              />
+            </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-2 mt-4">
             {additionalImages.map((image, index) => (
               <div key={index} className="relative">
@@ -154,11 +141,6 @@ const AddProductPage = () => {
                   width={100}
                   height={100}
                   className="rounded"
-                />
-                <AiOutlineDelete
-                  size={20}
-                  onClick={() => handleDeleteAdditionalImage(index)}
-                  className="cursor-pointer text-red-700 absolute top-1 right-1"
                 />
               </div>
             ))}
@@ -205,7 +187,7 @@ const AddProductPage = () => {
             rows={5}
             style={{ direction: "rtl" }}
           ></textarea>
-          <button type="submit">Add Apartment</button>
+          <button type="submit">Add Compound</button>
         </form>
       </div>
     </section>
