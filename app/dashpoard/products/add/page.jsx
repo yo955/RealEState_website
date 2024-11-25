@@ -24,6 +24,7 @@ const AddProductPage = () => {
     description: "",
     address: "رياض",
     images: [],
+    pdf: "",
   });
   useEffect(() => {
     console.log(product);
@@ -177,6 +178,14 @@ const AddProductPage = () => {
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
           </select>
+          <label>Pdf</label>
+          <input
+            type="text"
+            name="Pdf"
+            placeholder="Pdf"
+            value={product.pdf}
+            onChange={handleChange}
+          />
           <label>Description</label>
           <textarea
             name="description"
